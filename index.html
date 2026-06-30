@@ -522,6 +522,17 @@ function toggleCart() {
     renderCartDropdownItems();
   }
 }
+// DAGDAG ITO DITO ↓
+function navigateWithFade(url) {
+  const overlay = document.getElementById('page-transition-overlay');
+  if (!overlay) { window.location.href = url; return; }
+  overlay.style.transition = 'opacity 0.4s ease';
+  overlay.style.opacity = '1';
+  overlay.style.pointerEvents = 'all';
+  setTimeout(() => {
+    window.location.href = url;
+  }, 420);
+}
 function closeSearch() {
   const searchWrapper = document.getElementById('searchDropdown');
   if (!searchWrapper) return;
@@ -590,7 +601,7 @@ function toggleSearch() {
             </div>
           </div>`;
       });
-      cartHTML += `<div style="margin-top: 20px; text-align: center;"><a href="checkout.html" class="btn btn--primary" style="width: 100%; display: block; text-decoration: none;">PROCEED TO CHECKOUT</a></div>`;
+      cartHTML += `<div style="margin-top: 20px; text-align: center;"><a href="#" onclick="navigateWithFade('checkout.html'); return false;" class="btn btn--primary" style="width: 100%; display: block; text-decoration: none;">PROCEED TO CHECKOUT</a></div>`;
       bodyContainer.innerHTML = cartHTML;
       if (totalSpan) totalSpan.innerText = `₱${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
     }
