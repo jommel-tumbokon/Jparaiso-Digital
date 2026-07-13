@@ -74,6 +74,12 @@ function init(){
 
     loadNavigation();
 
+    updateAccountMenu();
+
+    updateCartBadgeUI();
+    
+    generateProductGrid();
+
 }
 
 
@@ -178,3 +184,5 @@ function loadSEO() {
         CONFIG.seo.favicon;
 
 }
+
+

@@ -317,7 +317,7 @@
         </div>
       </div>
     </section>
-    <script async src="//www.instagram.com/embed.js"></script>
+    
   </main>
 
   <!-- ============================================================ -->
@@ -452,283 +452,21 @@ method="POST">
   </div>
 <!-- PAGE TRANSITION OVERLAY -->
 <div id="page-transition-overlay"></div>
-  <!-- ============================================================ -->
-  <!-- SCRIPTS -->
-  <!-- ============================================================ -->
-  <script>
-    // GLOBAL VARIABLES
-    let riparadiseCart = JSON.parse(localStorage.getItem('rip_cart')) || [];
-    let isModalOpen = false;
-
-    
-    function executeProductSearch(query) {
-      const cleanQuery = query.toLowerCase().trim();
-      const productItems = document.querySelectorAll('.product-grid__item');
-      let hasResults = false;
-      productItems.forEach(item => {
-        const titleEl = item.querySelector('.product-card__title');
-        const metaEl = item.querySelector('.product-card__meta');
-        const titleText = titleEl ? titleEl.innerText.toLowerCase() : '';
-        const metaText = metaEl ? metaEl.innerText.toLowerCase() : '';
-        const isMatch = cleanQuery === '' || titleText.includes(cleanQuery) || metaText.includes(cleanQuery);
-        item.style.display = isMatch ? '' : 'none';
-        if (isMatch) { item.classList.add('is-visible'); hasResults = true; }
-      });
-      const noResultsMsg = document.getElementById('searchNoResults');
-      if (noResultsMsg) noResultsMsg.style.display = (cleanQuery === '' || hasResults) ? 'none' : 'block';
-    }
-
-
-    // ==========================================
-    // DOM CONTENT LOADED
-    // ==========================================
-    document.addEventListener('DOMContentLoaded', () => {
-      // Initialize
-      updateAccountMenu();
-      updateCartBadgeUI();
-      generateProductGrid();
-// RIPPLE EFFECT SA ACCOUNT DROPDOWN ITEMS
-document.querySelectorAll('.dropdown-item').forEach(item => {
-  item.addEventListener('click', function(e) {
-    // Ripple effect
-    const ripple = document.createElement('span');
-    ripple.classList.add('rip-ripple');
-    const rect = item.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    ripple.style.cssText = `
-      width: ${size}px; height: ${size}px;
-      left: ${e.clientX - rect.left - size/2}px;
-      top:  ${e.clientY - rect.top  - size/2}px;
-    `;
-    item.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-
-    // White fade transition para sa mga links na may href na pupunta sa ibang page
-    const href = item.getAttribute('href');
-    const isExternalLink = href && href !== '#' && !href.startsWith('javascript');
-    if (isExternalLink) {
-  e.preventDefault();
-  const overlay = document.getElementById('page-transition-overlay');
-  if (overlay) {
-    overlay.style.transition = 'opacity 0.4s ease';
-    overlay.style.opacity = '1';
-    overlay.style.pointerEvents = 'all';
-    setTimeout(() => {
-      window.location.href = href;
-    }, 420);
-  } else {
-    window.location.href = href;
-  }
-}
-  });
-});
-      // Mobile Nav Toggle
-      const navToggle = document.getElementById('nav-toggle');
-      const mobileNav = document.querySelector('.mobile-nav');
-      if (navToggle && mobileNav) {
-        navToggle.addEventListener('change', function () {
-          if (this.checked) {
-            mobileNav.style.transform = 'translateX(0)';
-            mobileNav.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-          } else {
-            mobileNav.style.transform = 'translateX(-100%)';
-            mobileNav.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-          }
-        });
-        mobileNav.querySelectorAll('.mobile-nav__link').forEach(link => {
-          link.addEventListener('click', () => {
-            navToggle.checked = false;
-            mobileNav.style.transform = 'translateX(-100%)';
-            mobileNav.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-          });
-        });
-      }
-
-      // Search
-      const searchInput = document.getElementById('ripSearchInput');
-      if (searchInput) {
-        searchInput.addEventListener('input', (e) => executeProductSearch(e.target.value));
-        searchInput.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            const shopSection = document.getElementById('shop');
-            if (shopSection && searchInput.value.trim() !== '') shopSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      }
-
-      // Login Form
-      const loginForm = document.getElementById('loginForm');
-      if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const email = document.getElementById('loginEmail').value.trim();
-          const password = document.getElementById('loginPassword').value;
-          const users = JSON.parse(localStorage.getItem('rip_users')) || [];
-          const user = users.find(u => u.email === email && u.password === password);
-          if (user) {
-            localStorage.setItem('rip_user', JSON.stringify(user));
-            closeLoginModal();
-            updateAccountMenu();
-            showNotification('Welcome back to RIPARADISE', 'success');
-            loginForm.reset();
-          } else {
-            showNotification('Invalid email or password', 'error');
-          }
-        });
-      }
-
-      // Register Form
-      const registerForm = document.getElementById('registerForm');
-      if (registerForm) {
-        registerForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const name = document.getElementById('registerName').value.trim();
-          const email = document.getElementById('registerEmail').value.trim();
-          const password = document.getElementById('registerPassword').value;
-          const users = JSON.parse(localStorage.getItem('rip_users')) || [];
-          if (users.find(u => u.email === email)) {
-            showNotification('Email already registered', 'error');
-            return;
-          }
-          const newUser = { name, email, password, createdAt: new Date().toISOString() };
-          users.push(newUser);
-          localStorage.setItem('rip_users', JSON.stringify(users));
-          localStorage.setItem('rip_user', JSON.stringify(newUser));
-          closeRegisterModal();
-          updateAccountMenu();
-          showNotification('Account created! Welcome to RIPARADISE', 'success');
-          registerForm.reset();
-        });
-      }
-
-// Close dropdowns on outside click
-document.addEventListener('click', (e) => {
-
-// X button ng cart header — isara
-if (e.target.closest('.cart-dropdown-close')) {
-  closeAllDropdownsExcept('none');
-  return;
-}
-
-// Kung nag-click sa loob ng cart (kasama remove/qty buttons) — huwag isara
-if (e.target.closest('.rip-cart-dropdown')) {
-  return;
-}
-
-// Kung nag-click sa cart ICON — hayaan ang toggleCart()
-if (e.target.closest('.site-header__cart')) {
-  return;
-}
-
-// Kung nag-click sa account dropdown — hayaan ang toggleAccountMenu()
-if (e.target.closest('.account-dropdown')) {
-  return;
-}
-
-// Kung nag-click sa search — hayaan
-if (e.target.closest('.rip-search-container')) {
-  return;
-}
-
-// Lahat ng iba — outside click, isara lahat
-closeAllDropdownsExcept('none');
-});
-
-      // Escape Key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          closeLoginModal();
-          closeRegisterModal();
-          closeAllDropdownsExcept('none');
-          const dropdown = document.getElementById('accountDropdown');
-          if (dropdown) dropdown.classList.remove('is-active');
-        }
-      });
-
-      // Product Observer
-      const productObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            productObserver.unobserve(entry.target);
-          }
-        });
-      }, { root: null, threshold: 0.15 });
-      document.querySelectorAll('.product-grid__item').forEach(item => productObserver.observe(item));
-
-      // Newsletter
-      const newsletterForm = document.getElementById('newsletter-form');
-      if (newsletterForm) {
-        newsletterForm.addEventListener('submit', async function(e) {
-          e.preventDefault();
-          const formData = new FormData(newsletterForm);
-          try {
-            const response = await fetch(newsletterForm.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
-            if (response.ok) {
-              newsletterForm.reset();
-              const successMsg = document.getElementById('newsletter-success');
-              if (successMsg) {
-                successMsg.style.display = 'block';
-                setTimeout(() => successMsg.style.display = 'none', 4000);
-              }
-            }
-          } catch (error) { console.error('Newsletter error:', error); }
-        });
-      }
-
-    // PALITAN ang scroll listener
-let lastScrollY = window.scrollY;
-window.addEventListener('scroll', () => {
-  const currentScrollY = window.scrollY;
-  // Isara lang ang dropdowns kapag nag-scroll ng 5px pababa/pataas
-  if (Math.abs(currentScrollY - lastScrollY) > 5) {
-    closeAllDropdownsExcept('none');
-  }
-  lastScrollY = currentScrollY;
-
-  const header = document.querySelector('.site-header') || document.querySelector('header');
-  if (!header) return;
-  const videoSectionHeight = window.innerHeight;
-  if (window.scrollY > videoSectionHeight) {
-    header.classList.add('site-header--hidden');
-    header.classList.add('site-header--scrolled');
-  } else {
-    header.classList.remove('site-header--hidden');
-    header.classList.remove('site-header--scrolled');
-  }
-});
-    });
-    // FADE IN ON LOAD (Page Enter Animation)
-window.addEventListener('DOMContentLoaded', () => {
-  const overlay = document.getElementById('page-transition-overlay');
-  if (overlay) {
-    // Siguraduhing visible muna bago i-fade out
-    overlay.style.transition = 'none';
-    overlay.style.opacity = '1';
-    overlay.style.pointerEvents = 'none';
-
-    // Small delay para ma-render ng browser ang initial state
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        overlay.style.transition = 'opacity 0.5s ease-out';
-        overlay.style.opacity = '0';
-      });
-    });
-    // Hindi na natin siya ire-remove — kailangan pa siya para sa exit transition
-  }
-});
+     
 
 </script>
+<script async src="//www.instagram.com/embed.js"></script>
 <script src="config.js"></script>
 <script src="app.js"></script>
 <script src="products.js"></script>
+<script src="observer.js"></script>
+<script src="animation.js"></script>
 <script src="cart.js"></script>
 <script src="modal.js"></script>
 <script src="auth.js"></script>
 <script src="navigation.js"></script>
+<script src="search.js"></script>
+<script src="mobile-nav.js"></script>
+<script src="newsletter.js"></script>
 </body>
 </html>

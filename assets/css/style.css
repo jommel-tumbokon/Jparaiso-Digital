@@ -251,7 +251,7 @@
      ============================================================ */
   /* Kakagat 'to kapag nag-scroll down pagkatapos ng video (itataas ang header para magtago) */
   .site-header--hidden {
-    transform: translateY(-100%);
+    transform: translateY(-120%);
   }
   
   /* Kakagat 'to kapag nag-scroll up: Magiging White Background bar na may Black Links/Icons */

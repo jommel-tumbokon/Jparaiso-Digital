@@ -1,3 +1,10 @@
+/* ==========================================================
+   CART.JS
+========================================================== */
+
+// GLOBAL VARIABLES
+let riparadiseCart = JSON.parse(localStorage.getItem('rip_cart')) || [];
+
 function toggleCart() {
     const cartDropdown = document.querySelector('.rip-cart-dropdown');
     if (!cartDropdown) return;
@@ -73,3 +80,4 @@ function toggleCart() {
     if (badge) badge.innerText = totalItems;
   }
 
+ 

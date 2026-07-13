@@ -4,6 +4,8 @@ const CONFIG = {
        BRANDING
     ========================================== */
 
+    shopName: "RIPARADISE",
+    
     tagline: "THIS IS MY HERO",
 
     logo: "assets/images/riparadiselogoupdated.png",

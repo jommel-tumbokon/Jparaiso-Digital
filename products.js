@@ -25,4 +25,14 @@ function generateProductGrid() {
               </a>
             </article>
           </li>`).join('');
+          observeProductCards();
       }
+      function executeProductSearch(query) {
+        const items = document.querySelectorAll('.product-grid__item');
+        const q = query.toLowerCase();
+        items.forEach(item => {
+          const title = item.querySelector('.product-card__title')?.innerText.toLowerCase() || '';
+          item.style.display = title.includes(q) ? '' : 'none';
+        });
+      }
+      

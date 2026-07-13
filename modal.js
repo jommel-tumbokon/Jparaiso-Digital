@@ -3,6 +3,7 @@
    Product Quick View
    Cart Modal Actions
 ========================================================== */
+let isModalOpen = false;
 
 function openProductModal(title, price, imgSrc, showSizeChart = true) {
     const modal = document.getElementById('productQuickViewModal');
@@ -27,9 +28,9 @@ function openProductModal(title, price, imgSrc, showSizeChart = true) {
     document.body.style.overflow = 'hidden';
     isModalOpen = true;
     document.addEventListener('keydown', handleEscKey);
-  }
+}
 
-  function closeProductModal() {
+function closeProductModal() {
     const modal = document.getElementById('productQuickViewModal');
     if (modal) {
       modal.classList.remove('is-active');
@@ -37,37 +38,37 @@ function openProductModal(title, price, imgSrc, showSizeChart = true) {
       isModalOpen = false;
       document.removeEventListener('keydown', handleEscKey);
     }
-  }
+}
 
-  function handleEscKey(event) {
+function handleEscKey(event) {
     if (event.key === 'Escape' && isModalOpen) closeProductModal();
-  }
+}
 
-  // PALITAN NG GANITO
+// Close modal when clicking backdrop
 document.addEventListener('click', (event) => {
-const modal = document.getElementById('productQuickViewModal');
-if (event.target == modal) closeProductModal();
+    const modal = document.getElementById('productQuickViewModal');
+    if (event.target == modal) closeProductModal();
 });
 
-  function adjustModalQty(change) {
+function adjustModalQty(change) {
     const qtyInput = document.getElementById('modalQtyInput');
     if (!qtyInput) return;
     let currentQty = parseInt(qtyInput.value) || 1;
     currentQty += change;
     if (currentQty < 1) currentQty = 1;
     qtyInput.value = currentQty;
-  }
+}
 
-  function scrollToSizeChart() {
+function scrollToSizeChart() {
     const targetSection = document.getElementById('modalSizeChartSection');
     const detailsPanel = document.getElementById('modalDetailsContainer');
     if (targetSection && detailsPanel) {
       const targetOffset = targetSection.offsetTop - 20;
       detailsPanel.scrollTo({ top: targetOffset, behavior: 'smooth' });
     }
-  }
+}
 
-  function triggerAddToCart() {
+function triggerAddToCart() {
     const sizeInput = document.querySelector('input[name="product-size"]:checked');
     const selectedSize = sizeInput ? sizeInput.value : 'S';
     const qtyEl = document.getElementById('modalQtyInput');
@@ -84,16 +85,7 @@ if (event.target == modal) closeProductModal();
     }
     localStorage.setItem('rip_cart', JSON.stringify(riparadiseCart));
     updateCartBadgeUI();
+    // Toast utility now lives in ui-feedback.js or auth.js
     showRiparadiseToast(`${productTitle} (${selectedSize}) x${itemQuantity}`);
     closeProductModal();
-  }
-
-  function showRiparadiseToast(detailsText) {
-    const toast = document.getElementById('toastNotification');
-    const detailsContainer = document.getElementById('toastItemDetails');
-    if (toast && detailsContainer) {
-      detailsContainer.innerText = detailsText;
-      toast.classList.add('show');
-      setTimeout(() => { toast.classList.remove('show'); }, 3500);
-    }
-  }
+}

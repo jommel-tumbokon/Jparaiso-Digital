@@ -80,3 +80,59 @@
           mobileUser.style.display = 'none';
         }
       }
+
+      // Login Form
+      const loginForm = document.getElementById('loginForm');
+      if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = document.getElementById('loginEmail').value.trim();
+          const password = document.getElementById('loginPassword').value;
+          const users = JSON.parse(localStorage.getItem('rip_users')) || [];
+          const user = users.find(u => u.email === email && u.password === password);
+          if (user) {
+            localStorage.setItem('rip_user', JSON.stringify(user));
+            closeLoginModal();
+            updateAccountMenu();
+            showNotification('Welcome back to RIPARADISE', 'success');
+            loginForm.reset();
+          } else {
+            showNotification('Invalid email or password', 'error');
+          }
+        });
+      }
+
+      // Register Form
+      const registerForm = document.getElementById('registerForm');
+      if (registerForm) {
+        registerForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('registerName').value.trim();
+          const email = document.getElementById('registerEmail').value.trim();
+          const password = document.getElementById('registerPassword').value;
+          const users = JSON.parse(localStorage.getItem('rip_users')) || [];
+          if (users.find(u => u.email === email)) {
+            showNotification('Email already registered', 'error');
+            return;
+          }
+          const newUser = { name, email, password, createdAt: new Date().toISOString() };
+          users.push(newUser);
+          localStorage.setItem('rip_users', JSON.stringify(users));
+          localStorage.setItem('rip_user', JSON.stringify(newUser));
+          closeRegisterModal();
+          updateAccountMenu();
+          showNotification('Account created! Welcome to RIPARADISE', 'success');
+          registerForm.reset();
+        });
+      }
+
+      
+  function showRiparadiseToast(detailsText) {
+    const toast = document.getElementById('toastNotification');
+    const detailsContainer = document.getElementById('toastItemDetails');
+    if (toast && detailsContainer) {
+      detailsContainer.innerText = detailsText;
+      toast.classList.add('show');
+      setTimeout(() => { toast.classList.remove('show'); }, 3500);
+    }
+  }
