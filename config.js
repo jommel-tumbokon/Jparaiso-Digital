@@ -4,8 +4,6 @@ const CONFIG = {
        BRANDING
     ========================================== */
 
-    shopName: "TEST BRAND",
-
     tagline: "THIS IS MY HERO",
 
     logo: "assets/images/riparadiselogoupdated.png",
@@ -126,6 +124,7 @@ products: [
         hasSizeChart: false
     }
 ],
+
 /* ==========================================
    SOCIAL LINKS
 ========================================== */
@@ -139,6 +138,7 @@ socials: {
     youtube: "https://www.youtube.com/@dial.seven7"
 
 },
+
 /* ==========================================
    NEWSLETTER
 ========================================== */
@@ -148,6 +148,51 @@ newsletter: {
     title: "JOIN",
 
     formAction: "https://formspree.io/f/mvzjgrqz"
+
+},
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+navigation: {
+
+    shop: {
+        label: "SHOP",
+        href: "#shop"
+    },
+
+    event: {
+        label: "EVENTS",
+        href: "#Event"
+    }
+
+},
+
+/* ==========================================
+   SEO
+========================================== */
+
+seo: {
+
+    title: "TEST BRAND",
+
+    description: "Premium streetwear inspired by modern culture.",
+
+    favicon: "assets/images/favicon.png"
+
+},
+
+/* ==========================================
+   CONTACT
+========================================== */
+
+contact: {
+
+    email: "hello@testbrand.com",
+
+    phone: "+63 912 345 6789",
+
+    address: "Taguig City"
 
 },
 };

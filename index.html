@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="RIPARADISE — Premium streetwear. Shop the latest drops.">
+  <meta
+    id="meta-description"
+    name="description"
+    content="">
   <title id="page-title"></title>
+  <link
+    id="site-favicon"
+    rel="icon"
+    href="">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +34,23 @@
   
       <nav class="site-nav" aria-label="Primary">
         <ul class="site-nav__list site-nav__list--left">
-          <li class="site-nav__item"><a href="#shop" class="site-nav__link">Shop</a></li>
-          <li class="site-nav__item"><a href="#Event" class="site-nav__link">Event</a></li>
+      
+          <li class="site-nav__item">
+            <a
+              id="nav-shop"
+              href="#"
+              class="site-nav__link">
+            </a>
+          </li>
+      
+          <li class="site-nav__item">
+            <a
+              id="nav-event"
+              href="#"
+              class="site-nav__link">
+            </a>
+          </li>
+      
         </ul>
       </nav>
   
@@ -438,146 +460,7 @@ method="POST">
     let riparadiseCart = JSON.parse(localStorage.getItem('rip_cart')) || [];
     let isModalOpen = false;
 
-    // ==========================================
-    // GLOBAL FUNCTIONS (ACCESSIBLE BY ONCLICK)
-    // ==========================================
     
-    function openLoginModal() {
-      const modal = document.getElementById('loginModal');
-      if (modal) { modal.classList.add('is-active'); document.body.style.overflow = 'hidden'; }
-    }
-
-    function closeLoginModal() {
-      const modal = document.getElementById('loginModal');
-      if (modal) { modal.classList.remove('is-active'); document.body.style.overflow = ''; }
-    }
-
-    function openRegisterModal() {
-      const modal = document.getElementById('registerModal');
-      if (modal) { modal.classList.add('is-active'); document.body.style.overflow = 'hidden'; }
-    }
-
-    function closeRegisterModal() {
-      const modal = document.getElementById('registerModal');
-      if (modal) { modal.classList.remove('is-active'); document.body.style.overflow = ''; }
-    }
-
-    function toggleAccountMenu() {
-  const dropdown = document.getElementById('accountDropdown');
-  if (!dropdown) return;
-  const isOpen = dropdown.classList.contains('is-active');
-  closeAllDropdownsExcept('account');
-  if (!isOpen) {
-    dropdown.classList.add('is-active');
-    updateAccountMenu();
-  }
-}
-
-function logout() {
-  localStorage.removeItem('rip_user');
-  updateAccountMenu();
-  showNotification('You have been logged out', 'success');
-  closeAllDropdownsExcept('none');
-}
-
-    function showNotification(message, type = 'success') {
-      const existing = document.querySelector('.notification');
-      if (existing) existing.remove();
-      const notification = document.createElement('div');
-      notification.className = `notification notification--${type}`;
-      notification.textContent = message;
-      document.body.appendChild(notification);
-      setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease forwards';
-        setTimeout(() => notification.remove(), 300);
-      }, 3000);
-    }
-
-    function updateAccountMenu() {
-      const user = JSON.parse(localStorage.getItem('rip_user'));
-      const loggedOutView = document.getElementById('accountLoggedOut');
-      const loggedInView = document.getElementById('accountLoggedIn');
-      const userEmailDisplay = document.getElementById('userEmailDisplay');
-      const mobileGuest = document.getElementById('mobileAccountGuest');
-      const mobileUser = document.getElementById('mobileAccountUser');
-      const mobileUserEmail = document.getElementById('mobileUserEmail');
-      
-      if (user && loggedOutView && loggedInView) {
-        loggedOutView.style.display = 'none';
-        loggedInView.style.display = 'block';
-        userEmailDisplay.textContent = user.email;
-      } else if (loggedOutView && loggedInView) {
-        loggedOutView.style.display = 'block';
-        loggedInView.style.display = 'none';
-      }
-      
-      if (user && mobileGuest && mobileUser) {
-        mobileGuest.style.display = 'none';
-        mobileUser.style.display = 'block';
-        if (mobileUserEmail) mobileUserEmail.textContent = user.email;
-      } else if (mobileGuest && mobileUser) {
-        mobileGuest.style.display = 'block';
-        mobileUser.style.display = 'none';
-      }
-    }
-
-    function closeAllDropdownsExcept(activeElement = 'none') {
-  const cartDropdown = document.querySelector('.rip-cart-dropdown');
-  if (cartDropdown && activeElement !== 'cart') cartDropdown.classList.remove('is-active', 'active');
-  
-  const searchWrapper = document.getElementById('searchDropdown');
-  if (searchWrapper && activeElement !== 'search') {
-    searchWrapper.classList.remove('is-active');
-    const searchInput = document.getElementById('ripSearchInput');
-    if (searchInput) { searchInput.value = ''; executeProductSearch(''); }
-  }
-
-  // DAGDAG — isara rin ang account dropdown
-  const accountDropdown = document.getElementById('accountDropdown');
-  if (accountDropdown && activeElement !== 'account') {
-    accountDropdown.classList.remove('is-active');
-  }
-}
-
-function toggleCart() {
-  const cartDropdown = document.querySelector('.rip-cart-dropdown');
-  if (!cartDropdown) return;
-  const isCurrentlyOpen = cartDropdown.classList.contains('is-active');
-  closeAllDropdownsExcept('cart');
-  if (!isCurrentlyOpen) {
-    cartDropdown.classList.add('is-active', 'active');
-    renderCartDropdownItems();
-  }
-}
-// DAGDAG ITO DITO ↓
-function navigateWithFade(url) {
-  const overlay = document.getElementById('page-transition-overlay');
-  if (!overlay) { window.location.href = url; return; }
-  overlay.style.transition = 'opacity 0.4s ease';
-  overlay.style.opacity = '1';
-  overlay.style.pointerEvents = 'all';
-  setTimeout(() => {
-    window.location.href = url;
-  }, 420);
-}
-function closeSearch() {
-  const searchWrapper = document.getElementById('searchDropdown');
-  if (!searchWrapper) return;
-  searchWrapper.classList.remove('is-active');
-  const s = document.getElementById('ripSearchInput');
-  if (s) { s.value = ''; executeProductSearch(''); }
-}
-function toggleSearch() {
-  const searchWrapper = document.getElementById('searchDropdown');
-  if (!searchWrapper) return;
-  const isOpen = searchWrapper.classList.contains('is-active');
-  closeAllDropdownsExcept('search');
-  if (!isOpen) {
-    searchWrapper.classList.add('is-active');
-    setTimeout(() => { const s = document.getElementById('ripSearchInput'); if(s) s.focus(); }, 100);
-  }
-}
-
     function executeProductSearch(query) {
       const cleanQuery = query.toLowerCase().trim();
       const productItems = document.querySelectorAll('.product-grid__item');
@@ -595,186 +478,6 @@ function toggleSearch() {
       if (noResultsMsg) noResultsMsg.style.display = (cleanQuery === '' || hasResults) ? 'none' : 'block';
     }
 
-    function renderCartDropdownItems() {
-      const bodyContainer = document.getElementById('cartDropdownBody');
-      const totalSpan = document.getElementById('cartDropdownTotal');
-      if (!bodyContainer) return;
-      if (riparadiseCart.length === 0) {
-        bodyContainer.innerHTML = '<div class="rip-cart-empty">YOUR BAG IS CURRENTLY EMPTY.</div>';
-        if (totalSpan) totalSpan.innerText = "₱0.00";
-        return;
-      }
-      let cartHTML = '';
-      let grandTotal = 0;
-      riparadiseCart.forEach((item, index) => {
-        const numericPrice = parseFloat(item.price.replace(/[^0-9.-]+/g, "")) || 0;
-        const itemSubtotal = numericPrice * item.quantity;
-        grandTotal += itemSubtotal;
-        cartHTML += `
-          <div class="rip-dropdown-item">
-            <div class="rip-dropdown-item__img"><img src="${item.image}" alt="${item.title}"></div>
-            <div class="rip-dropdown-item__details">
-              <h4 class="rip-dropdown-item__title">${item.title}</h4>
-              <p class="rip-dropdown-item__variant">Size: ${item.size}</p>
-              <div class="rip-dropdown-item__qty-control">
-  <button type="button" onclick="event.stopPropagation(); changeDropdownQty(${index}, -1)">-</button>
-  <span class="rip-dropdown-qty-num">${item.quantity}</span>
-  <button type="button" onclick="event.stopPropagation(); changeDropdownQty(${index}, 1)">+</button>
-</div>
-            </div>
-            <div class="rip-dropdown-item__right">
-              <button type="button" class="rip-dropdown-item__remove" onclick="event.stopPropagation(); removeDropdownItem(${index})" aria-label="Remove item">&times;</button>
-              <span class="rip-dropdown-item__price">₱${itemSubtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
-            </div>
-          </div>`;
-      });
-      cartHTML += `<div style="margin-top: 20px; text-align: center;"><a href="#" onclick="navigateWithFade('checkout.html'); return false;" class="btn btn--primary" style="width: 100%; display: block; text-decoration: none;">PROCEED TO CHECKOUT</a></div>`;
-      bodyContainer.innerHTML = cartHTML;
-      if (totalSpan) totalSpan.innerText = `₱${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-    }
-
-    function changeDropdownQty(index, amount) {
-      riparadiseCart[index].quantity += amount;
-      if (riparadiseCart[index].quantity <= 0) riparadiseCart.splice(index, 1);
-      localStorage.setItem('rip_cart', JSON.stringify(riparadiseCart));
-      updateCartBadgeUI();
-      renderCartDropdownItems();
-      const cartDropdown = document.querySelector('.rip-cart-dropdown');
-      if (cartDropdown) cartDropdown.classList.add('is-active', 'active');
-    }
-
-    function removeDropdownItem(index) {
-      riparadiseCart.splice(index, 1);
-      localStorage.setItem('rip_cart', JSON.stringify(riparadiseCart));
-      updateCartBadgeUI();
-      renderCartDropdownItems();
-      const cartDropdown = document.querySelector('.rip-cart-dropdown');
-      if (cartDropdown) cartDropdown.classList.add('is-active', 'active');
-    }
-
-    function updateCartBadgeUI() {
-      const totalItems = riparadiseCart.reduce((sum, item) => sum + item.quantity, 0);
-      const badge = document.querySelector('.site-header__cart-count');
-      if (badge) badge.innerText = totalItems;
-    }
-
-    function generateProductGrid() {
-  const grid = document.getElementById('productGrid');
-  if (!grid) return;
-
-  const products = CONFIG.products;
-
-  grid.innerHTML = products.map((p) => `
-        <li class="product-grid__item">
-          <article class="product-card">
-            <a href="#" class="product-card__link" onclick="openProductModal('${p.title}', '${p.price}', '${p.image}', ${p.hasSizeChart}); return false;">
-              <div class="product-card__media">
-                ${p.badge ? `<span class="product-card__badge ${p.badgeClass}">${p.badge}</span>` : ''}
-                <img class="product-card__image" src="${p.image}" alt="${p.alt}" width="800" height="1000" loading="lazy">
-              </div>
-              <div class="product-card__body">
-                <h3 class="product-card__title">${p.title}</h3>
-                <p class="product-card__meta">${p.meta}</p>
-                <p class="product-card__price">${p.price}</p>
-              </div>
-            </a>
-          </article>
-        </li>`).join('');
-    }
-
-    function openProductModal(title, price, imgSrc, showSizeChart = true) {
-      const modal = document.getElementById('productQuickViewModal');
-      if (!modal) return;
-      const sizeSection = document.getElementById('modalSizeChartSection');
-      const sizeHeader = document.querySelector('.p-size-header-row');
-      const sizeGrid = document.querySelector('.p-size-options-grid');
-      if (showSizeChart) {
-        if (sizeSection) sizeSection.style.display = '';
-        if (sizeHeader) sizeHeader.style.display = '';
-        if (sizeGrid) sizeGrid.style.display = '';
-      } else {
-        if (sizeSection) sizeSection.style.display = 'none';
-        if (sizeHeader) sizeHeader.style.display = 'none';
-        if (sizeGrid) sizeGrid.style.display = 'none';
-      }
-      if (title) document.getElementById('modalProductTitle').innerText = title;
-      if (price) document.getElementById('modalProductPrice').innerText = price;
-      if (imgSrc) document.getElementById('modalProductImg').src = imgSrc;
-      document.getElementById('modalQtyInput').value = 1;
-      modal.classList.add('is-active');
-      document.body.style.overflow = 'hidden';
-      isModalOpen = true;
-      document.addEventListener('keydown', handleEscKey);
-    }
-
-    function closeProductModal() {
-      const modal = document.getElementById('productQuickViewModal');
-      if (modal) {
-        modal.classList.remove('is-active');
-        document.body.style.overflow = '';
-        isModalOpen = false;
-        document.removeEventListener('keydown', handleEscKey);
-      }
-    }
-
-    function handleEscKey(event) {
-      if (event.key === 'Escape' && isModalOpen) closeProductModal();
-    }
-
-    // PALITAN NG GANITO
-document.addEventListener('click', (event) => {
-  const modal = document.getElementById('productQuickViewModal');
-  if (event.target == modal) closeProductModal();
-});
-
-    function adjustModalQty(change) {
-      const qtyInput = document.getElementById('modalQtyInput');
-      if (!qtyInput) return;
-      let currentQty = parseInt(qtyInput.value) || 1;
-      currentQty += change;
-      if (currentQty < 1) currentQty = 1;
-      qtyInput.value = currentQty;
-    }
-
-    function scrollToSizeChart() {
-      const targetSection = document.getElementById('modalSizeChartSection');
-      const detailsPanel = document.getElementById('modalDetailsContainer');
-      if (targetSection && detailsPanel) {
-        const targetOffset = targetSection.offsetTop - 20;
-        detailsPanel.scrollTo({ top: targetOffset, behavior: 'smooth' });
-      }
-    }
-
-    function triggerAddToCart() {
-      const sizeInput = document.querySelector('input[name="product-size"]:checked');
-      const selectedSize = sizeInput ? sizeInput.value : 'S';
-      const qtyEl = document.getElementById('modalQtyInput');
-      const itemQuantity = qtyEl ? (parseInt(qtyEl.value) || 1) : 1;
-      const productTitle = document.getElementById('modalProductTitle').innerText;
-      const productPrice = document.getElementById('modalProductPrice').innerText;
-      const productImg = document.getElementById('modalProductImg').src;
-      const cartItem = { title: productTitle, price: productPrice, size: selectedSize, quantity: itemQuantity, image: productImg };
-      const existingItemIndex = riparadiseCart.findIndex(item => item.title === cartItem.title && item.size === cartItem.size);
-      if (existingItemIndex > -1) {
-        riparadiseCart[existingItemIndex].quantity += itemQuantity;
-      } else {
-        riparadiseCart.push(cartItem);
-      }
-      localStorage.setItem('rip_cart', JSON.stringify(riparadiseCart));
-      updateCartBadgeUI();
-      showRiparadiseToast(`${productTitle} (${selectedSize}) x${itemQuantity}`);
-      closeProductModal();
-    }
-
-    function showRiparadiseToast(detailsText) {
-      const toast = document.getElementById('toastNotification');
-      const detailsContainer = document.getElementById('toastItemDetails');
-      if (toast && detailsContainer) {
-        detailsContainer.innerText = detailsText;
-        toast.classList.add('show');
-        setTimeout(() => { toast.classList.remove('show'); }, 3500);
-      }
-    }
 
     // ==========================================
     // DOM CONTENT LOADED
@@ -1019,8 +722,13 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-  </script>
-  <script src="config.js"></script>
-  <script src="app.js"></script>
+</script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script src="modal.js"></script>
+<script src="auth.js"></script>
+<script src="navigation.js"></script>
 </body>
 </html>

@@ -13,10 +13,6 @@
 ========================================================== */
 
 function loadBranding() {
-
-    // Browser tab title
-    document.getElementById("page-title").textContent = CONFIG.shopName;
-
     // Header logo
     document.getElementById("site-logo").src = CONFIG.logo;
     document.getElementById("site-logo").alt = CONFIG.shopName;
@@ -64,6 +60,8 @@ function loadHero() {
 
 function init(){
 
+    loadSEO();
+
     loadBranding();
 
     loadHero();
@@ -73,6 +71,8 @@ function init(){
     loadFooter();
 
     loadNewsletter();
+
+    loadNavigation();
 
 }
 
@@ -143,4 +143,38 @@ function loadNewsletter() {
         CONFIG.newsletter.formAction;
 
 }
+/* ==========================================================
+   NAVIGATION
+========================================================== */
+function loadNavigation() {
 
+    // Shop
+    document.getElementById("nav-shop").textContent =
+        CONFIG.navigation.shop.label;
+
+    document.getElementById("nav-shop").href =
+        CONFIG.navigation.shop.href;
+
+    // Event
+    document.getElementById("nav-event").textContent =
+        CONFIG.navigation.event.label;
+
+    document.getElementById("nav-event").href =
+        CONFIG.navigation.event.href;
+
+}
+function loadSEO() {
+
+    // Browser Title
+    document.getElementById("page-title").textContent =
+        CONFIG.seo.title;
+
+    // Meta Description
+    document.getElementById("meta-description").content =
+        CONFIG.seo.description;
+
+    // Favicon
+    document.getElementById("site-favicon").href =
+        CONFIG.seo.favicon;
+
+}
