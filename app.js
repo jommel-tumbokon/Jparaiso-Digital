@@ -70,6 +70,10 @@ function init(){
 
     loadTheme();
 
+    loadFooter();
+
+    loadNewsletter();
+
 }
 
 
@@ -97,3 +101,46 @@ function loadTheme() {
     );
 
 }
+/* ==========================================================
+   FOOTER
+   Social Links
+========================================================== */
+
+function loadFooter() {
+
+    // Instagram
+    document.getElementById("social-instagram").href =
+        CONFIG.socials.instagram;
+
+    // TikTok
+    document.getElementById("social-tiktok").href =
+        CONFIG.socials.tiktok;
+
+    // YouTube
+    document.getElementById("social-youtube").href =
+        CONFIG.socials.youtube;
+
+    // Copyright Year
+    document.getElementById("footer-year").textContent =
+    new Date().getFullYear();
+
+    // Shop Name
+    document.getElementById("footer-shop-name").textContent =
+    CONFIG.shopName;
+}   
+/* ==========================================================
+   NEWSLETTER
+========================================================== */
+
+function loadNewsletter() {
+
+    // Newsletter title
+    document.getElementById("newsletter-title").textContent =
+        CONFIG.newsletter.title;
+
+    // Newsletter Form Action
+    document.getElementById("newsletter-form").action =
+        CONFIG.newsletter.formAction;
+
+}
+

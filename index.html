@@ -304,8 +304,15 @@
   <footer class="site-footer" id="site-footer">
     <div class="site-footer__main container">
       <div class="site-footer__newsletter-wrapper">
-        <h2 class="site-footer__heading">STAY IN THE LOOP</h2>
-        <form class="modern-newsletter-form" action="https://formspree.io/f/mvzjgrqz" method="POST" id="newsletter-form">
+        <h2
+    id="newsletter-title"
+    class="site-footer__heading">
+</h2>
+<form
+id="newsletter-form"
+class="modern-newsletter-form"
+action="#"
+method="POST">
           <div class="modern-newsletter-form__fields">
             <input class="modern-newsletter-form__input" type="email" id="newsletter-email" name="email" placeholder="Email" autocomplete="email" required>
             <button class="modern-newsletter-form__submit" type="submit" aria-label="Email">
@@ -320,19 +327,31 @@
       </div>
       <div class="site-footer__social">
         <ul class="social-links" role="list">
-          <li><a href="https://www.instagram.com/ri.paradise/" class="social-links__link" aria-label="Instagram">
+          <li><a
+            id="social-instagram"
+            href="https://www.instagram.com/world.ph.3000.dsr.c/"
+            class="social-links__link"
+            aria-label="Instagram">
             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="3" y="3" width="18" height="18" rx="5"/>
               <circle cx="12" cy="12" r="4"/>
               <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
             </svg>
           </a></li>
-          <li><a href="https://www.tiktok.com/@r.i.paradise" class="social-links__link" aria-label="TikTok">
+          <li><a
+            id="social-tiktok"
+            href="https://www.tiktok.com/@r.i.paradise"
+            class="social-links__link"
+            aria-label="TikTok">
             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
             </svg>
           </a></li>
-          <li><a href="https://www.youtube.com/@dial.seven7" class="social-links__link" aria-label="YouTube">
+          <li><a
+            id="social-youtube"
+            href="https://www.youtube.com/@dial.seven7"
+            class="social-links__link"
+            aria-label="YouTube">
             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M3 7.5c0-1.5 1-2.5 2.5-2.7C7.5 4.2 12 4 12 4s4.5.2 6.5.8C20 4.9 21 6 21 7.5v9c0 1.5-1 2.5-2.5 2.7-2 .6-6.5.8-6.5.8s-4.5-.2-6.5-.8C4 19 3 18 3 16.5v-9z"/>
               <path d="M10 9.5v5l5-2.5-5-2.5z"/>
@@ -343,9 +362,12 @@
     </div>
     <div class="site-footer__bottom">
       <div class="site-footer__bottom-inner container">
-        <p class="site-footer__copyright">&copy; <span id="footer-year">2026</span> RIPARADISE. All rights reserved.</p>
-      </div>
-    </div>
+        <p class="site-footer__copyright">
+          &copy;
+          <span id="footer-year"></span>
+          <span id="footer-shop-name"></span>.
+          All rights reserved.
+      </p>
   </footer> 
 
   <!-- TOAST NOTIFICATION -->
@@ -415,18 +437,6 @@
     // GLOBAL VARIABLES
     let riparadiseCart = JSON.parse(localStorage.getItem('rip_cart')) || [];
     let isModalOpen = false;
-
-    // PRODUCTS DATABASE
-    const PRODUCTS = [
-      { title: 'Funeral Tee', price: '₱799.00', image: 'assets/images/funeral-tee.png', alt: 'Funeral Tee in jet black', meta: 'Jet black · Streetwear', badge: 'Featured', badgeClass: '', hasSizeChart: true },
-      { title: 'Rhinestone Tee', price: '₱799.00', image: 'assets/images/rhinestone-tee.png', alt: 'Rhinestone Tee', meta: 'Graphic Tee · Custom Fit', badge: 'New Arrival ', badgeClass: '', hasSizeChart: true },
-      { title: 'Rust Reaper Tee', price: '₱799.00', image: 'assets/images/rust-reaper-tee.png', alt: 'Rust Reaper Tee', meta: 'Vintage Black · Limited', badge: '', badgeClass: '', hasSizeChart: true },
-      { title: 'RIPARADISE Keychain v1', price: '₱350.00', image: 'assets/images/keychain-1.png', alt: 'RIPARADISE Keychain Type 1', meta: 'Accessories · Acrylic', badge: '', badgeClass: '', hasSizeChart: false },
-      { title: 'RIPARADISE Keychain v2', price: '₱350.00', image: 'assets/images/keychain-2.png', alt: 'RIPARADISE Keychain Type 2', meta: 'Accessories · Metal', badge: '', badgeClass: '', hasSizeChart: false },
-      { title: 'RIPARADISE Keychain v3', price: '₱350.00', image: 'assets/images/keychain-3.png', alt: 'RIPARADISE Keychain Type 3', meta: 'Accessories · Utility', badge: '', badgeClass: '', hasSizeChart: false },
-      { title: 'RIPARADISE Bag', price: '₱599.00', image: 'assets/images/bag.png', alt: 'RIPARADISE bag', meta: 'Accessories · Denim', badge: '', badgeClass: '', hasSizeChart: false },
-      { title: 'RIPARADISE Pouch', price: '₱699.00', image: 'assets/images/pouch.png', alt: 'RIPARADISE pouch', meta: 'Accessories · Denim', badge: '', badgeClass: '', hasSizeChart: false }
-    ];
 
     // ==========================================
     // GLOBAL FUNCTIONS (ACCESSIBLE BY ONCLICK)
@@ -649,9 +659,12 @@ function toggleSearch() {
     }
 
     function generateProductGrid() {
-      const grid = document.getElementById('productGrid');
-      if (!grid) return;
-      grid.innerHTML = PRODUCTS.map((p) => `
+  const grid = document.getElementById('productGrid');
+  if (!grid) return;
+
+  const products = CONFIG.products;
+
+  grid.innerHTML = products.map((p) => `
         <li class="product-grid__item">
           <article class="product-card">
             <a href="#" class="product-card__link" onclick="openProductModal('${p.title}', '${p.price}', '${p.image}', ${p.hasSizeChart}); return false;">
