@@ -5,7 +5,7 @@ const CONFIG = {
     ========================================== */
 
     shopName: "RIPARADISE",
-    
+
     tagline: "THIS IS MY HERO",
 
     logo: "assets/images/riparadiselogoupdated.png",
@@ -197,4 +197,50 @@ contact: {
     address: "Taguig City"
 
 },
+
+/* ==========================================
+   ABOUT SECTION
+========================================== */
+
+about: {
+
+    title: "ABOUT RIPARADISE",
+
+    subtitle: "Designed for modern street culture.",
+
+    description:
+        "RIPARADISE creates premium apparel inspired by skateboarding, art, and everyday life. Every collection focuses on quality, comfort, and timeless design.",
+
+    image: "assets/images/about.jpg",
+
+    button: "LEARN MORE"
+
+},
+
+
+/* ==========================================
+   SHOP SECTION
+========================================== */
+
+shop: {
+
+    eyebrow: "Latest Collection"
+
+},
+
+/* ==========================================
+   EVENT SECTION
+========================================== */
+
+event: {
+
+    eyebrow: "Latest Event",
+
+    title: "SKUH SKATE CLIP CONTEST",
+
+    instagram:
+        "https://www.instagram.com/p/DZRii9fzN7R/"
+
+},
+
 };

@@ -144,9 +144,38 @@
       </div>
       <nav class="mobile-nav__inner" aria-label="Mobile">
         <ul class="mobile-nav__list">
-          <li><a href="#shop" class="mobile-nav__link"><span>Shop</span><span class="mobile-nav__arrow">&rarr;</span></a></li>
-          <li><a href="#Event" class="mobile-nav__link"><span>Event</span><span class="mobile-nav__arrow">&rarr;</span></a></li>
-          
+          <li>
+
+            <a
+                id="mobile-nav-shop"
+                href="#"
+                class="mobile-nav__link">
+    
+                <span id="mobile-nav-shop-text"></span>
+    
+                <span class="mobile-nav__arrow">
+                    &rarr;
+                </span>
+    
+            </a>
+    
+        </li>
+        <li>
+
+          <a
+              id="mobile-nav-event"
+              href="#"
+              class="mobile-nav__link">
+  
+              <span id="mobile-nav-event-text"></span>
+  
+              <span class="mobile-nav__arrow">
+                  &rarr;
+              </span>
+  
+          </a>
+  
+      </li>
           <li id="mobileAccountGuest" class="mobile-nav__divider">
             <a href="#" class="mobile-nav__link" onclick="openLoginModal(); document.getElementById('nav-toggle').checked = false; return false;">
               <span>Log In</span><span class="mobile-nav__arrow">&rarr;</span>
@@ -167,19 +196,30 @@
       </nav>
       <div class="mobile-nav__bottom">
         <div class="mobile-nav__socials">
-          <a href="https://www.instagram.com/ri.paradise/" target="_blank" rel="noopener" aria-label="Instagram">
+          <a
+    id="mobile-social-instagram"
+    href=""
+    target="_blank"
+    rel="noopener"
+    aria-label="Instagram">
             <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
           </a>
-          <a href="https://www.tiktok.com/@r.i.paradise" aria-label="TikTok">
+          <a
+    id="mobile-social-tiktok"
+    href=""
+    aria-label="TikTok">
             <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
             </svg>
           </a>
-          <a href="https://www.youtube.com/@dial.seven7" aria-label="YouTube">
+          <a
+    id="mobile-social-youtube"
+    href=""
+    aria-label="YouTube">
             <svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
               <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
@@ -281,13 +321,62 @@
       </div>
     
     </section>
+
     
+    <!-- ============================================================
+     ABOUT SECTION
+============================================================ -->
+<section class="about-section" id="about">
+
+  <div class="about-section__inner container">
+
+    <!-- About Image -->
+    <div class="about-section__media">
+      <img
+        id="about-image"
+        src=""
+        alt=""
+        class="about-section__image">
+    </div>
+
+    <!-- About Content -->
+    <div class="about-section__content">
+
+      <p
+        id="about-subtitle"
+        class="about-section__subtitle">
+      </p>
+
+      <h2
+        id="about-title"
+        class="about-section__title">
+      </h2>
+
+      <p
+        id="about-description"
+        class="about-section__description">
+      </p>
+
+      <a
+        id="about-button"
+        href="#shop"
+        class="btn btn--primary">
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
 
     <!-- SHOP SECTION -->
     <section class="shop-section" id="shop" aria-labelledby="featured-collection-title">
       <article class="featured-collection">
         <header class="section-header container">
-          <p class="section-header__eyebrow">Latest Collection</p>
+          <p
+    id="shop-eyebrow"
+    class="section-header__eyebrow">
+</p>
         </header>
         <ul class="product-grid" id="productGrid"></ul>
       </article>
@@ -310,8 +399,15 @@
     <!-- EVENT SECTION -->
     <section class="event-section" id="Event">
       <div class="event-section__inner container">
-        <p class="section-header__eyebrow">Latest Event</p>
-        <h2 class="event-section__title">SKUH SKATE CLIP CONTEST</h2>
+        <p
+    id="event-eyebrow"
+    class="section-header__eyebrow">
+</p>
+
+<h2
+    id="event-title"
+    class="event-section__title">
+</h2>
         <div class="event-section__embed">
           <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZRii9fzN7R/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%;"></blockquote>
         </div>

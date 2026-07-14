@@ -13,9 +13,11 @@
 ========================================================== */
 
 function loadBranding() {
-    // Header logo
-    document.getElementById("site-logo").src = CONFIG.logo;
-    document.getElementById("site-logo").alt = CONFIG.shopName;
+
+    const logo = document.getElementById("site-logo");
+
+    logo.src = CONFIG.logo;
+    logo.alt = CONFIG.shopName;
 
 }
 
@@ -52,6 +54,63 @@ function loadHero() {
 
 }
 
+/* ==========================================================
+   ABOUT SECTION
+========================================================== */
+
+function loadAbout() {
+
+    // About image
+    document.getElementById("about-image").src =
+        CONFIG.about.image;
+
+    document.getElementById("about-image").alt =
+        CONFIG.about.title;
+
+    // About subtitle
+    document.getElementById("about-subtitle").textContent =
+        CONFIG.about.subtitle;
+
+    // About title
+    document.getElementById("about-title").textContent =
+        CONFIG.about.title;
+
+    // About description
+    document.getElementById("about-description").textContent =
+        CONFIG.about.description;
+
+    // About button
+    document.getElementById("about-button").textContent =
+        CONFIG.about.button;
+
+}
+
+/* ==========================================================
+   SHOP SECTION
+========================================================== */
+
+function loadShop() {
+
+    document.getElementById("shop-eyebrow").textContent =
+        CONFIG.shop.eyebrow;
+
+}
+
+/* ==========================================================
+   EVENT SECTION
+========================================================== */
+
+function loadEvent() {
+
+    // Event eyebrow
+    document.getElementById("event-eyebrow").textContent =
+        CONFIG.event.eyebrow;
+
+    // Event title
+    document.getElementById("event-title").textContent =
+        CONFIG.event.title;
+
+}
 
 /* ==========================================================
    INITIALIZE WEBSITE
@@ -66,6 +125,12 @@ function init(){
 
     loadHero();
 
+    loadAbout();
+
+    loadShop();
+
+    loadEvent();
+
     loadTheme();
 
     loadFooter();
@@ -77,7 +142,7 @@ function init(){
     updateAccountMenu();
 
     updateCartBadgeUI();
-    
+
     generateProductGrid();
 
 }
@@ -87,6 +152,7 @@ function init(){
 document.addEventListener("DOMContentLoaded", () => {
     init();
 });
+
 /* ==========================================================
    THEME
    Update CSS Variables from CONFIG
@@ -107,6 +173,7 @@ function loadTheme() {
     );
 
 }
+
 /* ==========================================================
    FOOTER
    Social Links
@@ -125,7 +192,21 @@ function loadFooter() {
     // YouTube
     document.getElementById("social-youtube").href =
         CONFIG.socials.youtube;
+        
+    /* Mobile Social Links */
 
+    // Instagram
+    document.getElementById("mobile-social-instagram").href =
+        CONFIG.socials.instagram;
+        
+    // TikTok
+    document.getElementById("mobile-social-tiktok").href =
+        CONFIG.socials.tiktok;
+        
+    // YouTube
+    document.getElementById("mobile-social-youtube").href =
+        CONFIG.socials.youtube;
+ 
     // Copyright Year
     document.getElementById("footer-year").textContent =
     new Date().getFullYear();
@@ -134,6 +215,7 @@ function loadFooter() {
     document.getElementById("footer-shop-name").textContent =
     CONFIG.shopName;
 }   
+
 /* ==========================================================
    NEWSLETTER
 ========================================================== */
@@ -149,26 +231,45 @@ function loadNewsletter() {
         CONFIG.newsletter.formAction;
 
 }
+
 /* ==========================================================
    NAVIGATION
 ========================================================== */
+
 function loadNavigation() {
 
-    // Shop
+    // Desktop - Shop
     document.getElementById("nav-shop").textContent =
         CONFIG.navigation.shop.label;
 
     document.getElementById("nav-shop").href =
         CONFIG.navigation.shop.href;
 
-    // Event
+    // Desktop - Event
     document.getElementById("nav-event").textContent =
         CONFIG.navigation.event.label;
 
     document.getElementById("nav-event").href =
         CONFIG.navigation.event.href;
 
+    /* Mobile Navigation */
+
+    // Shop
+    document.getElementById("mobile-nav-shop-text").textContent =
+        CONFIG.navigation.shop.label;
+
+    document.getElementById("mobile-nav-shop").href =
+        CONFIG.navigation.shop.href;
+
+    // Event
+    document.getElementById("mobile-nav-event-text").textContent =
+        CONFIG.navigation.event.label;
+
+    document.getElementById("mobile-nav-event").href =
+        CONFIG.navigation.event.href;
+
 }
+
 function loadSEO() {
 
     // Browser Title

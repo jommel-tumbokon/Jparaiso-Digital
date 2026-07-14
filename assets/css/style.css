@@ -408,7 +408,75 @@
     margin: 0 0 var(--space-md) 0;
     color: #ffffff;
   }
-  
+  /* ==========================================================
+   ABOUT SECTION
+========================================================== */
+
+.about-section {
+  padding: 160px 0;
+  background: #ffffff;
+}
+
+.about-section__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.about-section__image{
+
+  width:100%;
+
+  display:block;
+
+  object-fit:cover;
+
+}
+
+.about-section__subtitle{
+
+  font-size:12px;
+
+  font-weight:600;
+
+  letter-spacing:.25em;
+
+  text-transform:uppercase;
+
+  color:#777;
+
+  margin-bottom:20px;
+
+}
+
+.about-section__title{
+
+  font-size:56px;
+
+  font-weight:600;
+
+  line-height:1.1;
+
+  margin-bottom:28px;
+
+  max-width:500px;
+
+}
+
+.about-section__description{
+
+  max-width:520px;
+
+  line-height:1.9;
+
+  color:#666;
+
+  font-size:16px;
+
+  margin-bottom:40px;
+
+}
   /* --------------------------------------------------------------------------
      5. FEATURED PRODUCTS & GRID SYSTEM (CLEAN BLACK ON WHITE)
      -------------------------------------------------------------------------- */
@@ -458,7 +526,7 @@
     color: #000000 !important;
   }
   /* ==========================================================================
-   PRODUCT GRID: BASE STYLES (Eto ang default para sa Mobile)
+   6. PRODUCT GRID: BASE STYLES (Eto ang default para sa Mobile)
    ========================================================================== */
 .product-grid {
   display: grid;
@@ -601,7 +669,7 @@
   }
   
   /* --------------------------------------------------------------------------
-     6. SITE FOOTER SECTION (MINIMALIST / REFERENCE STYLE)
+     8. SITE FOOTER SECTION (MINIMALIST / REFERENCE STYLE)
      -------------------------------------------------------------------------- */
   .site-footer {
     background-color: #ffffff !important;
@@ -744,7 +812,7 @@
   }
   
   /* --------------------------------------------------------------------------
-     8. MOBILE DRAWER & SAFEGUARDS SYSTEM (UNDER 768PX)
+     9. MOBILE DRAWER & SAFEGUARDS SYSTEM (UNDER 768PX)
      -------------------------------------------------------------------------- */
   @media (max-width: 768px) {
     .site-nav {
@@ -915,7 +983,7 @@
     opacity: 0.5;
   }
   /* ============================================================
-   RIPARADISE MODAL QUICK VIEW & SIZE CHART SYSTEM
+   10. RIPARADISE MODAL QUICK VIEW & SIZE CHART SYSTEM
    ============================================================ */
 
 /* Overlay Background covering full screen */
