@@ -15,9 +15,17 @@
 function loadBranding() {
 
     const logo = document.getElementById("site-logo");
+    const logoLink = document.getElementById("site-logo-link");
 
     logo.src = CONFIG.logo;
     logo.alt = CONFIG.shopName;
+
+    if (logoLink) {
+        logoLink.setAttribute(
+            "aria-label",
+            `${CONFIG.shopName} Home`
+        );
+    }
 
 }
 

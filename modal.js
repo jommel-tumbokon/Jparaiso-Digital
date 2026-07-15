@@ -3,10 +3,6 @@
    ========================================================== */
    let isModalOpen = false;
 
-   // Safe initialization: Kung walang laman ang localStorage, gagawa ng empty array
-   let riparadiseCart = JSON.parse(localStorage.getItem('rip_cart')) || [];
-   
-   
    /* ==========================================================
       2. MODAL CORE FUNCTIONS (Open / Close)
       ========================================================== */
@@ -15,9 +11,11 @@
        if (!modal) return;
    
        // A. Update Basic Product Info
-       if (title) document.getElementById('modalProductTitle').innerText = title;
-       if (price) document.getElementById('modalProductPrice').innerText = price;
-       if (imgSrc) document.getElementById('modalProductImg').src = imgSrc;
+       // A. Update Basic Product Info
+if (title) document.getElementById('modalProductTitle').innerText = title;
+if (price) document.getElementById('modalProductPrice').innerText = price;
+if (imgSrc) document.getElementById('modalProductImg').src = imgSrc;
+if (title) document.getElementById('modalProductImg').alt = title;
    
        // B. Handle Size Chart Visibility & Rendering
        toggleSizeChartVisibility(showSizeChart);

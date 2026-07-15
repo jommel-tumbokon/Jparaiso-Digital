@@ -1508,10 +1508,17 @@
 
 .rip-dropdown-item__qty-control button {
   background: none;
-  border: none;
+  border: 1px solid #ddd;
   padding: 2px 8px;
   cursor: pointer;
   font-size: 12px;
+  color: #000;
+  border-radius: 4px;
+}
+
+.rip-dropdown-item__qty-control button:hover {
+  background-color: #f0f0f0;
+  border-color: #999;
 }
 
 /* FIX FOR CART DROPDOWN QUANTITY VISIBILITY */
