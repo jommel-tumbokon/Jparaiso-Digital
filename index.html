@@ -73,10 +73,17 @@
           </button>
           <div id="searchDropdown" class="rip-search-wrapper">
             <div class="rip-search-box">
-              <input type="text" id="ripSearchInput" placeholder="SEARCH PRODUCTS..." autocomplete="off">
+              <input
+    id="search-input"
+    placeholder=""
+>
               <button type="button" class="rip-search-close-btn" onclick="closeSearch()" aria-label="Close search">&times;</button>
             </div>
-            <div id="searchNoResults" class="rip-search-no-results" style="display: none;">NO PRODUCTS MATCH.</div>
+            <div
+    id="searchNoResults"
+    class="rip-search-no-results"
+    style="display:none;">
+</div>
           </div>
         </div>
       
@@ -100,14 +107,37 @@
   &times;
 </button>
             <div id="accountLoggedOut">
-              <a href="#" class="dropdown-item" onclick="openLoginModal(); return false;">Log In</a>
-              <a href="#" class="dropdown-item" onclick="openRegisterModal(); return false;">Create Account</a>
+              <a
+    id="login-link"
+    href="#"
+    class="dropdown-item"
+    onclick="openLoginModal(); return false;">
+</a>
+<a
+id="register-link"
+href="#"
+class="dropdown-item"
+onclick="openRegisterModal(); return false;">
+</a>
             </div>
             <div id="accountLoggedIn" style="display: none;">
               <div class="dropdown-user"><span id="userEmailDisplay">user@email.com</span></div>
-              <a href="account.html" class="dropdown-item">My Account</a>
-              <a href="account.html#orders" class="dropdown-item">Order History</a>
-              <a href="#" class="dropdown-item" onclick="logout(); return false;">Log Out</a>
+              <a
+    id="my-account-link"
+    href="account.html"
+    class="dropdown-item">
+</a>
+<a
+id="order-history-link"
+href="account.html#orders"
+class="dropdown-item">
+</a>
+<a
+id="logout-link"
+href="#"
+class="dropdown-item"
+onclick="logout(); return false;">
+</a>
             </div>
           </div>
         </div>
@@ -125,14 +155,23 @@
         <div id="cartDropdown" class="rip-cart-dropdown">
           <!-- X BUTTON + TITLE -->
           <div class="rip-cart-dropdown__header">
-            <span class="rip-cart-dropdown__title">YOUR BAG</span>
+            <span
+    id="cart-title"
+    class="rip-cart-dropdown__title">
+</span>
             <button type="button" class="dropdown-close-x cart-dropdown-close" aria-label="Close cart">&times;</button>
           </div>
           <div class="rip-cart-dropdown__body" id="cartDropdownBody">
-            <div class="rip-cart-empty">YOUR BAG IS CURRENTLY EMPTY.</div>
+            <div
+    id="cart-empty-message"
+    class="rip-cart-empty">
+</div>
           </div>
           <div class="rip-cart-total" style="margin-top: 15px; padding: 15px 15px 20px; border-top: 1px solid #e5e5e5; text-align: right; font-size: 14px;">
-            <strong>Total: <span id="cartDropdownTotal" style="color: #000;">₱0.00</span></strong>
+            <strong>
+              <span id="cart-total-label"></span>
+              <span id="cartDropdownTotal" style="color: #000;">₱0.00</span>
+          </strong>
           </div>
         </div>
       </div>
@@ -595,7 +634,7 @@ method="POST">
     <div class="rip-toast-content">
       <div class="rip-toast-checkmark">✓</div>
       <div class="rip-toast-text">
-        <span class="rip-toast-msg">ADDED TO BAG</span>
+        <span id="toast-message" class="rip-toast-msg"></span>
         <span id="toastItemDetails" class="rip-toast-sub">Funeral Tee (Size S)</span>
       </div>
     </div>
@@ -654,19 +693,27 @@ class="p-modal-price">
     id="modal-size-chart-title"
     class="p-chart-title">
 </h3>
-            <table class="p-chart-table">
-              <thead><tr>
-                <th id="size-chart-size-header"></th>
-                <th id="size-chart-chest-header"></th>
-                <th id="size-chart-length-header"></th>
-              </tr></thead>
-              <tbody>
-                <tr><td><strong>S</strong></td><td>36" - 38"</td><td>27"</td></tr>
-                <tr><td><strong>M</strong></td><td>39" - 41"</td><td>28"</td></tr>
-                <tr><td><strong>L</strong></td><td>42" - 44"</td><td>29"</td></tr>
-                <tr><td><strong>XL</strong></td><td>45" - 47"</td><td>30"</td></tr>
-              </tbody>
-            </table>
+<table class="p-chart-table">
+
+  <thead>
+
+      <tr>
+
+          <th id="size-chart-size-header"></th>
+
+          <th id="size-chart-chest-header"></th>
+
+          <th id="size-chart-length-header"></th>
+
+      </tr>
+
+  </thead>
+
+  <tbody id="modal-size-chart-body">
+
+  </tbody>
+
+</table>
           </div>
         </div>
       </div>

@@ -137,15 +137,63 @@ productModal: {
 
     sizeChartTitle: "Size Chart (Adult Fit)",
 
-    sizeHeader: "SIZE",
-
-    chestHeader: "CHEST (INCHES)",
-
-    lengthHeader: "LENGTH (INCHES)",
-
     sizeLabel: "Size",
 
-    addToCartButton: "ADD TO MY BAG"
+    addToCartButton: "ADD TO MY BAG",
+
+    sizeChartHeaders: {
+
+        size: "SIZE",
+    
+        chest: "CHEST (INCHES)",
+    
+        length: "LENGTH (INCHES)"
+    
+    },
+    
+    sizeChartRows: [
+    
+        {
+    
+            size: "S",
+    
+            chest: '36" - 38"',
+    
+            length: '27"'
+    
+        },
+    
+        {
+    
+            size: "M",
+    
+            chest: '39" - 41"',
+    
+            length: '28"'
+    
+        },
+    
+        {
+    
+            size: "L",
+    
+            chest: '42" - 44"',
+    
+            length: '29"'
+    
+        },
+    
+        {
+    
+            size: "XL",
+    
+            chest: '45" - 47"',
+    
+            length: '30"'
+    
+        }
+    
+    ],
 
 },
 
@@ -202,8 +250,12 @@ navigation: {
 
     event: {
         label: "EVENTS",
-        href: "#Event"
-    }
+        href: "#event"
+    },
+
+    searchPlaceholder: "SEARCH PRODUCTS...",
+
+    searchNoResults: "NO PRODUCTS MATCH.",
 
 },
 
@@ -363,7 +415,41 @@ auth: {
     
     registerPasswordHint:
         "Minimum 6 characters",
+    
+    menuLogin: "Log In",
+
+    menuRegister: "Create Account",
+        
+    menuMyAccount: "My Account",
+        
+    menuOrderHistory: "Order History",
+        
+    menuLogout: "Log Out",
+
+},
+
+/* ==========================================
+   UI & TEXTS
+========================================== */
+ui: {
+    toastAddedToBag: "ADDED TO BAG",
+    searchPlaceholder: "SEARCH PRODUCTS...",
+    searchNoResults: "NO PRODUCTS MATCH."
+},
+
+/* ==========================================
+   CART
+========================================== */
+
+cart: {
+
+    title: "YOUR BAG",
+
+    emptyMessage: "YOUR BAG IS CURRENTLY EMPTY.",
+
+    totalLabel: "Total:"
 
 },
 
 };
+

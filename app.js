@@ -166,6 +166,12 @@ function init(){
 
     loadNavigation();
 
+    loadSearch();
+
+    loadCart();
+
+    loadUI();
+
     updateAccountMenu();
 
     updateCartBadgeUI();
@@ -326,6 +332,47 @@ function loadSEO() {
 }
 
 /* ==========================================================
+   SEARCH
+========================================================== */
+
+function loadSearch() {
+
+    document.getElementById("search-input").placeholder =
+        CONFIG.navigation.searchPlaceholder;
+
+    document.getElementById("searchNoResults").textContent =
+        CONFIG.navigation.searchNoResults;
+
+}
+
+/* ==========================================================
+   CART
+========================================================== */
+
+function loadCart() {
+
+    document.getElementById("cart-title").textContent =
+        CONFIG.cart.title;
+
+    document.getElementById("cart-empty-message").textContent =
+        CONFIG.cart.emptyMessage;
+
+    document.getElementById("cart-total-label").textContent =
+        CONFIG.cart.totalLabel;
+
+}
+
+/* ==========================================================
+   UI TEXTS
+========================================================== */
+function loadUI() {
+    const toastMsg = document.getElementById("toast-message");
+    if (toastMsg) {
+        toastMsg.textContent = CONFIG.ui.toastAddedToBag;
+    }
+}
+
+/* ==========================================================
    LOOKBOOK
 ========================================================== */
 
@@ -445,4 +492,22 @@ function loadAuth() {
     document.getElementById("sign-in-link").textContent =
         CONFIG.auth.signInLink;
 
+        /* Account Dropdown */
+
+    document.getElementById("login-link").textContent =
+        CONFIG.auth.menuLogin;
+
+    document.getElementById("register-link").textContent =
+        CONFIG.auth.menuRegister;
+
+    document.getElementById("my-account-link").textContent =
+        CONFIG.auth.menuMyAccount;
+
+    document.getElementById("order-history-link").textContent =
+        CONFIG.auth.menuOrderHistory;
+
+    document.getElementById("logout-link").textContent =
+        CONFIG.auth.menuLogout;
+
 }
+
