@@ -410,32 +410,22 @@ class="modal__subtitle">
   <!-- MAIN CONTENT AREA -->
   <!-- ============================================================ -->
   <main id="main">
-    <!-- HERO VIDEO SECTION -->
-    <section class="hero-video-section">
 
-      <video
-        id="hero-video-player"
-        autoplay
-        loop
-        muted
-        playsinline
-        class="hero-video-bg">
-        <source
-    id="hero-video"
-    src=""
-    type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    
-      <div class="hero-video-overlay"></div>
-    
-      <div class="hero-video-content">
-        <p id="hero-subtitle"></p>
-        <h1 id="hero-title"></h1>
-        <a href="#shop" id="hero-btn" class="btn btn--primary hero-shop-btn"></a>
-      </div>
-    
-    </section>
+        <!-- HERO VIDEO/IMAGE SECTION -->
+        <section class="hero-video-section">
+
+          <!-- Dito mag-i-inject ang JS ng Video OR Image -->
+          <div id="hero-media-container"></div> 
+        
+          <div class="hero-video-overlay"></div>
+        
+          <div class="hero-video-content">
+            <p id="hero-subtitle"></p>
+            <h1 id="hero-title"></h1>
+            <a href="#shop" id="hero-btn" class="btn btn--primary hero-shop-btn"></a>
+          </div>
+        
+        </section>
 
     
     <!-- ============================================================
@@ -520,6 +510,120 @@ class="modal__subtitle">
     </div>
     <hr class="marquee-bottom-divider">
 
+<!-- ============================================================ -->
+<!-- BOOKING APPOINTMENT -->
+<!-- ============================================================ -->
+   
+<section id="contact" class="booking-section">
+  
+  <!-- Background Image at Dark Overlay -->
+  <div id="booking-bg" class="booking-bg"></div>
+  <div class="booking-overlay"></div>
+
+  <div class="booking-inner">
+
+    <h2 id="booking-title"></h2>
+    <p id="booking-subtitle" class="booking-subtitle"></p>
+
+
+    <!-- Booking Form -->
+    <div class="booking-card">
+      <form action="#" method="POST" enctype="multipart/form-data">
+
+        <div class="booking-field">
+          <label
+    id="booking-name-label"
+    for="booking-name">
+</label>
+          <input class="booking-input" type="text" id="booking-name" name="name" placeholder="Juan Dela Cruz" required>
+        </div>
+
+        <div class="booking-row">
+          <div class="booking-field">
+            <label
+    id="booking-email-label"
+    for="booking-email">
+</label>
+            <input class="booking-input" type="email" id="booking-email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="booking-field">
+            <label
+    id="booking-phone-label"
+    for="booking-phone">
+</label>
+            <input class="booking-input" type="tel" id="booking-phone" name="phone" placeholder="+63 912 345 6789" required>
+          </div>
+        </div>
+
+        <div class="booking-row">
+          <div class="booking-field">
+            <label
+    id="booking-date-label"
+    for="booking-date">
+</label>
+            <input class="booking-input" type="date" id="booking-date" name="date" required>
+          </div>
+          <div class="booking-field">
+            <label
+    id="booking-time-label"
+    for="booking-time">
+</label>
+            <input class="booking-input" type="time" id="booking-time" name="time" required>
+          </div>
+        </div>
+
+        <div class="booking-field">
+          <label
+    id="booking-message-label"
+    for="booking-idea">
+</label>
+          <textarea class="booking-input" id="booking-idea" name="message" rows="5" placeholder="Tell us about your tattoo idea..." required></textarea>
+        </div>
+
+        <div class="booking-row">
+          <div class="booking-field">
+            <label
+    id="booking-budget-label"
+    for="booking-budget">
+</label>
+            <input class="booking-input" type="text" id="booking-budget" name="budget" placeholder="e.g. ₱3,000 - ₱5,000">
+          </div>
+          <div class="booking-field">
+            <label
+    id="booking-reference-label"
+    for="booking-reference">
+</label>
+            <input class="booking-file" type="file" id="booking-reference" name="reference" accept="image/*">
+          </div>
+        </div>
+
+        <button
+    id="booking-submit-button"
+    type="submit"
+    class="booking-submit">
+</button>
+      </form>
+    </div>
+<!-- Contact Info Grid -->
+<div class="booking-info">
+  <div>
+    <h3>Location</h3>
+    <p>123 Main Street, Manila</p>
+  </div>
+  <div>
+    <h3>Call / Text</h3>
+    <p>+63 912 345 6789</p>
+  </div>
+  <div>
+    <h3>Hours</h3>
+    <p>Tue — Sun: 10AM — 8PM</p>
+  </div>
+</div>
+  </div>
+</section>
+
+
+
   <!-- ============================================================
      EVENT SECTION
 ============================================================ -->
@@ -550,7 +654,7 @@ class="modal__subtitle">
   <!-- ============================================================ -->
   <!-- FOOTER -->
   <!-- ============================================================ -->
-  <footer class="site-footer" id="site-footer">
+  <section id="contact" class="site-footer">
     <div class="site-footer__main container">
       <div class="site-footer__newsletter-wrapper">
         <h2
@@ -719,7 +823,18 @@ class="p-modal-price">
   </div>
 <!-- PAGE TRANSITION OVERLAY -->
 <div id="page-transition-overlay"></div>
-     
+
+<!-- DEV TOOL: Clear LocalStorage Config -->
+<button id="clear-config-btn" style="position: fixed; bottom: 20px; right: 20px; background: #ef4444; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; z-index: 9999;">
+  Clear Config Cache
+</button>
+
+<script>
+document.getElementById('clear-config-btn')?.addEventListener('click', () => {
+  localStorage.removeItem('studioos_config');
+  alert('Config cache cleared! Reloading...');
+  location.reload();
+});     
 
 </script>
 <script async src="//www.instagram.com/embed.js"></script>

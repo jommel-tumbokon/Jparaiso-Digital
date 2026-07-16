@@ -1,46 +1,41 @@
 const CONFIG = {
 
-    /* ==========================================
+/* ==========================================
+       MODULES / FEATURES TOGGLE
+========================================== */
+    modules: {
+        ecommerce: false,    // false = Itago ang Products at Cart
+        appointment: true    // true = Ipakita ang Booking/Contact focus
+    },
+
+/* ==========================================
        BRANDING
-    ========================================== */
-
-    shopName: "DSR",
-
-    tagline: "THIS IS MY HERO",
-
+========================================== */
+    shopName: "INK MASTERS TATTOO", // Pinalitan ko na rin
+    tagline: "PREMIUM CUSTOM TATTOOS",
     logo: "assets/products/dsrlogo1.png",
 
-
-    /* ==========================================
-       HERO SECTION
-    ========================================== */
-
+/* ==========================================
+       HERO SECTION (Isa lang dapat 'to!)
+========================================== */
     hero: {
-
-        title: "",
-
-        subtitle: "",
-
-        button: "BUY NOW",
-
-        video: "assets/products/dsrvideo1.mp4"
-
+        title: "INK MASTERS TATTOO",
+        subtitle: "Premium Custom Tattoos & Piercings",
+        button: "BOOK APPOINTMENT", 
+        buttonLink: "#contact",     
+        video: "", 
+        image: "assets/products/dsr.png", 
     },
 
-
-    /* ==========================================
-       WEBSITE COLORS
-    ========================================== */
-
+/* ==========================================
+       COLORS
+========================================== */
     colors: {
-
-        primary:"#ff0000",
-
+        primary: "#ff0000",
         secondary: "#ffffff"
-
     },
 
-   /* ==========================================
+/* ==========================================
    PRODUCTS
 ========================================== */
 
@@ -448,6 +443,98 @@ cart: {
     emptyMessage: "YOUR BAG IS CURRENTLY EMPTY.",
 
     totalLabel: "Total:"
+
+},
+
+/* ==========================================
+   BOOKING APPOINTMENT
+========================================== */
+
+booking: {
+
+    bgImage: "assets/products/dsr.png",
+
+    title: "Book Your Session",
+
+    subtitle:
+        "Ready to get inked? Appointments are highly recommended.",
+
+    buttonText:
+        "Book Now",
+
+    info: {
+
+        locationTitle: "Location",
+
+        location:
+            "123 Main Street, Manila",
+
+        phoneTitle:
+            "Call / Text",
+
+        phone:
+            "+63 912 345 6789",
+
+        hoursTitle:
+            "Hours",
+
+        hours:
+            "Tue — Sun: 10AM — 8PM"
+
+    },
+
+    fields: {
+
+        name:
+            "Your Name",
+
+        email:
+            "Your Email",
+
+        phone:
+            "Phone Number",
+
+        date:
+            "Preferred Date",
+
+        time:
+            "Preferred Time",
+
+        message:
+            "Tell us about your tattoo idea",
+
+        budget:
+            "Budget",
+
+        referenceImage:
+            "Reference Image"
+
+    },
+
+    placeholders: {
+
+        name:
+            "Juan Dela Cruz",
+
+        email:
+            "you@example.com",
+
+        phone:
+            "+63 912 345 6789",
+
+        budget:
+            "e.g. ₱3,000 - ₱5,000",
+
+        message:
+            "Tell us about your tattoo idea..."
+
+    },
+
+    optionalText:
+        "(optional)",
+
+    referenceAccept:
+        "image/*"
 
 },
 

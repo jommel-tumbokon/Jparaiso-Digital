@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RIPARADISE — Unified Premium White & Black Aesthetic (Phase 4 Clean)
+   JPARAISO - DIGITAL — Unified Premium White & Black Aesthetic (Phase 4 Clean)
    Brand Identity Storefront Layout · Smart Sticky White Header Fix
    ========================================================================== */
 
@@ -64,6 +64,7 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height); 
     overflow-x: hidden;
   }
   
@@ -1746,19 +1747,19 @@
 
   /* TRANSPARENT BACKGROUND AT LUTANG NA BLACK LETTERING */
   background: transparent !important;       /* Salamin ang background */
-  border: 2px solid #000000 !important;     /* Makapal na solid black border */
-  color: #000000 !important;                /* Solid Jet Black na kulay ng letra */
+  border: 2px solid var(--color-primary) !important;     
+  color: var(--color-primary) !important;                
   
   /* Aesthetics & Font */
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 13px;
-  font-weight: 800;                         /* Ginawa nating Bold para mas lalong lutang ang pagkablack */
+  font-weight: 800;                         
   
   /* Base 3D Shadow (Nakalapat pa sa sahig sa simula) */
-  box-shadow: 0px 0px 0px #000000 !important;
+  box-shadow: 0px 0px 0px var(--color-primary) !important;
   
-  transition: all 0.2s ease-in-out;         /* Mas mabilis nang konti para ramdam ang talbog ng 3D */
+  transition: all 0.2s ease-in-out;         
   cursor: pointer;
 }
 
@@ -1767,13 +1768,13 @@
   .hero-shop-btn:hover, 
   .hero-content .btn:hover, 
   .hero-section .btn:hover {
-    background: transparent !important;     /* Transparent pa rin gaya ng gusto mo */
-    color: #000000 !important;              /* Solid black pa rin ang letra */
-    border-color: #000000 !important;
+    background: var(--color-primary) !important;     
+    color: var(--color-primary-inverse, #ffffff) !important;             
+    border-color: var(--color-primary) !important;
     
     /* 3D POP LOGIC: Aangat ng 4px paitaas at pakaliwa, habang naiiwan ang solid black shadow sa ilalim */
     transform: translateY(46px) translateX(-4px) !important; 
-    box-shadow: 4px 4px 0px #000000 !important;
+    box-shadow: 4px 4px 0px var(--color-primary) !important;
   }
 }
 
@@ -1782,13 +1783,13 @@
   .hero-shop-btn, 
   .hero-content .btn, 
   .hero-section .btn {
-    transform: translateY(35px) !important;
-    margin-top: 380px !important;
+    margin-top: 150px !important;
+    transform: translateY(0) !important;
     
     background: transparent !important;
-    color: #000000 !important;
-    border: 2px solid #000000 !important;
-    box-shadow: 0px 0px 0px #000000 !important;
+    color: var(--color-primary) !important;              
+    border: 2px solid var(--color-primary) !important;   
+    box-shadow: 0px 0px 0px var(--color-primary) !important; 
   }
   
   /* Kapag pinindot sa mobile gamit ang daliri, tatalbog din ang 3D effect nang swabe */
@@ -1796,7 +1797,7 @@
   .hero-content .btn:active, 
   .hero-section .btn:active {
     transform: translateY(31px) translateX(-4px) !important; 
-    box-shadow: 4px 4px 0px #000000 !important;
+    box-shadow: 4px 4px 0px var(--color-primary) !important; 
   }
 }
 /* ==========================================================================
@@ -2438,4 +2439,273 @@
       margin-top: 150px !important; /* Bawasan mula 350px papuntang 150px (adjust mo kung kailangan) */
       transform: translateY(0) !important; /* Alisin ang extra shift */
   }
+}
+
+/* SMART HERO MEDIA CONTAINER */
+#hero-media-container {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-media-bg {
+  width: 100%; height: 100%;
+  object-fit: cover; /* Para hindi ma-stretch ang picture/video */
+  display: block;
+}
+
+/* Specific style para sa Image */
+.hero-image-bg {
+  object-position: center;
+}
+
+/* ==========================================================
+   BOOKING SECTION WITH BACKGROUND IMAGE
+========================================================== */
+.booking-section {
+  position: relative;
+  padding: 100px 20px 60px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.booking-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.booking-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);  /* Dark overlay para mabasa ang text */
+  z-index: 2;
+}
+
+.booking-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 700px;
+}
+
+.booking-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.booking-header h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.booking-subtitle {
+  color: #cccccc;
+  font-size: 1rem;
+}
+
+.booking-form-box {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  margin-bottom: 40px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .booking-header h2 { font-size: 1.6rem; }
+  .booking-form-box { padding: 25px; }
+}
+
+/* ==========================================================
+   BOOKING APPOINTMENT SECTION (CONFIG-DRIVEN BACKGROUND)
+========================================================== */
+.booking-section {
+  position: relative;
+  padding: 100px 20px 60px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 1. Dynamic Background Image (Set via JS/Config) */
+.booking-bg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* 2. Dark Overlay para mabasa ang text */
+.booking-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(10, 10, 10, 0.65); /* In-adjust para mas premium kaysa 0.75 */
+  z-index: 2;
+}
+
+/* 3. Main Container */
+.booking-inner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+}
+
+.booking-inner h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.booking-subtitle {
+  color: #eee;
+  margin-bottom: 44px;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 4. Premium Translucent Form Card (Pinaka-magandang version from your old code) */
+.booking-card {
+  max-width: 600px; /* Slightly wider for better form layout */
+  margin: 0 auto 40px auto;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.95); /* Mas malinis na white */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  padding: 40px 36px;
+}
+
+.booking-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.booking-field {
+  margin-bottom: 16px;
+}
+
+.booking-field label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #333;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.booking-field .hint {
+  font-weight: 400;
+  text-transform: none;
+  color: #888;
+  font-size: 0.75rem;
+}
+
+.booking-input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #111;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.booking-input:hover {
+  border-color: #b5b5b5;
+}
+
+.booking-input:focus {
+  outline: none;
+  border-color: #111;
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12);
+}
+
+textarea.booking-input {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.booking-file {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px dashed #c9c9c9;
+  border-radius: 8px;
+  background: #fafafa;
+  font-size: 0.85rem;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.booking-file:hover {
+  border-color: #999;
+  background: #f2f2f2;
+}
+
+.booking-file:focus {
+  outline: none;
+  border-color: #111;
+}
+
+.booking-submit {
+  width: 100%;
+  padding: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+}
+
+.booking-submit:hover {
+  background: #2b2b2b;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.booking-submit:active {
+  transform: translateY(1px);
+}
+
+/* 5. Mobile Responsive */
+@media (max-width: 768px) {
+  .booking-section { padding: 60px 16px; }
+  .booking-inner h2 { font-size: 1.6rem; }
+  .booking-card { padding: 26px 20px; border-radius: 14px; }
+  .booking-row { grid-template-columns: 1fr; gap: 0; }
 }

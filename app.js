@@ -5,6 +5,37 @@
    Dito manggagaling ang branding ng buong template.
 ========================================================== */
 
+/* ==========================================================
+   CONFIG LOADER (Check LocalStorage first, fallback to config.js)
+   ========================================================== */
+
+   function deepMergeConfig(target, source) {
+    if (!source || typeof source !== 'object') return target;
+    Object.keys(source).forEach((key) => {
+        const sourceVal = source[key];
+        const targetVal = target[key];
+        if (
+            sourceVal && typeof sourceVal === 'object' && !Array.isArray(sourceVal) &&
+            targetVal && typeof targetVal === 'object' && !Array.isArray(targetVal)
+        ) {
+            deepMergeConfig(targetVal, sourceVal);
+        } else {
+            target[key] = sourceVal;
+        }
+    });
+    return target;
+}
+
+try {
+    const savedConfig = localStorage.getItem('studioos_config');
+    if (savedConfig) {
+        const parsedConfig = JSON.parse(savedConfig);
+        deepMergeConfig(CONFIG, parsedConfig);
+        console.log('✅ Loaded config from LocalStorage (Admin Dashboard changes)');
+    }
+} catch (e) {
+    console.error('❌ Error loading saved config, falling back to default CONFIG:', e);
+}
 
 /* ==========================================================
    BRANDING
@@ -31,36 +62,37 @@ function loadBranding() {
 
 
 /* ==========================================================
-   HERO SECTION
-   Video
-   Title
-   Subtitle
-   Button
+   HERO SECTION (Smart: Video OR Image)
 ========================================================== */
-
 function loadHero() {
-
-    // Hero background video (Updated per Grok's instruction)
-    const heroSource = document.getElementById("hero-video");
-    const heroVideo = document.getElementById("hero-video-player");
-
-    heroSource.src = CONFIG.hero.video;
+    const mediaContainer = document.getElementById('hero-media-container');
     
-    // Sabihan ang browser na i-reload ang video
-    if (heroVideo) {
-        heroVideo.load();
+    // Check kung may Video o Image sa CONFIG
+    if (CONFIG.hero.video && CONFIG.hero.video !== "") {
+        mediaContainer.innerHTML = `
+            <video autoplay loop muted playsinline class="hero-media-bg">
+                <source src="${CONFIG.hero.video}" type="video/mp4">
+            </video>`;
+    } else if (CONFIG.hero.image) {
+        mediaContainer.innerHTML = `
+            <img src="${CONFIG.hero.image}" alt="Hero Background" class="hero-media-bg hero-image-bg">`;
     }
 
-    // Hero heading
-    document.getElementById("hero-title").textContent = CONFIG.hero.title;
-
-    // Hero subtitle
-    document.getElementById("hero-subtitle").textContent = CONFIG.hero.subtitle;
-
-    // Hero button
-    document.getElementById("hero-btn").textContent = CONFIG.hero.button;
+    // I-load ang texts at button
+    if (document.getElementById('hero-title')) {
+        document.getElementById('hero-title').innerText = CONFIG.hero.title;
+    }
+    if (document.getElementById('hero-subtitle')) {
+        document.getElementById('hero-subtitle').innerText = CONFIG.hero.subtitle;
+    }
     
-
+    // UPDATED: Handle button text AND link
+    const heroBtn = document.getElementById('hero-btn');
+    if (heroBtn) {
+        heroBtn.innerText = CONFIG.hero.button;
+        // Gamitin ang buttonLink mula sa config, o kaya default sa '#shop'
+        heroBtn.href = CONFIG.hero.buttonLink || '#shop'; 
+    }
 }
 
 /* ==========================================================
@@ -148,48 +180,57 @@ function loadEvent() {
    Tinatawag lahat ng functions dito kapag nag-load ang page.
 ========================================================== */
 
-function init(){
+function init() {
+    
+    // 1. MODULE CHECK: Hide E-commerce elements if turned off
+    // Kung walang 'modules' sa config, default to true (ecommerce ON)
+    const isEcommerce = CONFIG.modules?.ecommerce !== false; 
+    
+    if (!isEcommerce) {
+        // A. Hide Shop Section (Products Grid)
+        const shopSection = document.getElementById('shop');
+        if (shopSection) {
+            shopSection.style.display = 'none';
+        }
+        
+        // B. Hide Cart Icon sa Header 
+        // (Note: Palitan ang '.site-header__cart' kung iba ang exact class ng cart icon mo sa HTML)
+        const cartIcon = document.querySelector('.site-header__cart, .cart-icon, #cart-link');
+        if (cartIcon) {
+            cartIcon.style.display = 'none';
+        }
+        
+        console.log('🛒 E-commerce Mode: OFF (Service/Appointment Mode Active)');
+    }
 
+    // 2. Run all load functions
     loadSEO();
-
     loadBranding();
-
     loadHero();
-
     loadAbout();
-
-    loadShop();
+    
+    // I-run lang ang shop/cart functions kung naka-ON ang ecommerce
+    if (isEcommerce) {
+        loadShop();
+        loadCart();
+        updateAccountMenu();
+        updateCartBadgeUI();
+        generateProductGrid();
+    }
 
     loadEvent();
-
     loadLookbook();
-
     loadTheme();
-
     loadFooter();
-
+    loadBooking();
     loadNewsletter();
-
     loadAuth();
-
     loadNavigation();
-
     loadSearch();
-
-    loadCart();
-
     loadUI();
-
-    updateAccountMenu();
-
-    updateCartBadgeUI();
-
-    generateProductGrid();
-
 }
 
-
-// Run website (Updated to use DOMContentLoaded per Grok's suggestion)
+// Run website
 document.addEventListener("DOMContentLoaded", () => {
     init();
 });
@@ -260,6 +301,65 @@ function loadFooter() {
     document.getElementById("footer-copyright").textContent =
     CONFIG.footer.copyright;
 }   
+
+/* ==========================================================
+   BOOKING APPOINTMENT
+========================================================== */
+function loadBooking() {
+    
+    // Set Background Image
+    const bgContainer = document.getElementById('booking-bg');
+    if (bgContainer && CONFIG.booking.bgImage) {
+        bgContainer.style.backgroundImage = `url('${CONFIG.booking.bgImage}')`;
+    }
+
+    // Title & Subtitle
+    if (document.getElementById("booking-title")) {
+        document.getElementById("booking-title").textContent = CONFIG.booking.title;
+    }
+    
+    if (document.getElementById("booking-subtitle")) {
+        document.getElementById("booking-subtitle").textContent = CONFIG.booking.subtitle;
+    }
+
+    // Labels
+    if (document.getElementById("booking-name-label")) {
+        document.getElementById("booking-name-label").textContent = CONFIG.booking.fields.name;
+    }
+    
+    if (document.getElementById("booking-email-label")) {
+        document.getElementById("booking-email-label").textContent = CONFIG.booking.fields.email;
+    }
+    
+    if (document.getElementById("booking-phone-label")) {
+        document.getElementById("booking-phone-label").textContent = CONFIG.booking.fields.phone;
+    }
+    
+    if (document.getElementById("booking-date-label")) {
+        document.getElementById("booking-date-label").textContent = CONFIG.booking.fields.date;
+    }
+    
+    if (document.getElementById("booking-time-label")) {
+        document.getElementById("booking-time-label").textContent = CONFIG.booking.fields.time;
+    }
+    
+    if (document.getElementById("booking-message-label")) {
+        document.getElementById("booking-message-label").textContent = CONFIG.booking.fields.message;
+    }
+    
+    if (document.getElementById("booking-budget-label")) {
+        document.getElementById("booking-budget-label").textContent = CONFIG.booking.fields.budget;
+    }
+    
+    if (document.getElementById("booking-reference-label")) {
+        document.getElementById("booking-reference-label").textContent = CONFIG.booking.fields.referenceImage;
+    }
+
+    // Button Text
+    if (document.getElementById("booking-submit-button")) {
+        document.getElementById("booking-submit-button").textContent = CONFIG.booking.buttonText;
+    }
+}
 
 /* ==========================================================
    NEWSLETTER
