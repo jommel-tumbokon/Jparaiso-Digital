@@ -181,26 +181,28 @@ function loadEvent() {
 ========================================================== */
 
 function init() {
-    
-    // 1. MODULE CHECK: Hide E-commerce elements if turned off
-    // Kung walang 'modules' sa config, default to true (ecommerce ON)
+    // 1. MODULE CHECK: Hide / Show sections based on CONFIG
     const isEcommerce = CONFIG.modules?.ecommerce !== false; 
+    const isBookingEnabled = CONFIG.modules?.booking !== false;
     
+    // Hide Shop + Cart if E-commerce is OFF
     if (!isEcommerce) {
-        // A. Hide Shop Section (Products Grid)
         const shopSection = document.getElementById('shop');
-        if (shopSection) {
-            shopSection.style.display = 'none';
-        }
+        if (shopSection) shopSection.style.display = 'none';
         
-        // B. Hide Cart Icon sa Header 
-        // (Note: Palitan ang '.site-header__cart' kung iba ang exact class ng cart icon mo sa HTML)
         const cartIcon = document.querySelector('.site-header__cart, .cart-icon, #cart-link');
-        if (cartIcon) {
-            cartIcon.style.display = 'none';
-        }
+        if (cartIcon) cartIcon.style.display = 'none';
         
-        console.log('🛒 E-commerce Mode: OFF (Service/Appointment Mode Active)');
+        console.log('🛒 E-commerce Mode: OFF');
+    }
+
+    // Hide Booking Section if Booking is OFF
+    if (!isBookingEnabled) {
+        const bookingSection = document.getElementById('contact');
+        if (bookingSection) {
+            bookingSection.style.display = 'none';
+        }
+        console.log('📅 Booking Module: OFF');
     }
 
     // 2. Run all load functions
@@ -208,8 +210,17 @@ function init() {
     loadBranding();
     loadHero();
     loadAbout();
-    
-    // I-run lang ang shop/cart functions kung naka-ON ang ecommerce
+    loadEvent();
+    loadLookbook();
+    loadTheme();
+    loadFooter();
+    loadNewsletter();
+    loadAuth();
+    loadNavigation();
+    loadSearch();
+    loadUI();
+
+    // Conditional Loads
     if (isEcommerce) {
         loadShop();
         loadCart();
@@ -218,16 +229,9 @@ function init() {
         generateProductGrid();
     }
 
-    loadEvent();
-    loadLookbook();
-    loadTheme();
-    loadFooter();
-    loadBooking();
-    loadNewsletter();
-    loadAuth();
-    loadNavigation();
-    loadSearch();
-    loadUI();
+    if (isBookingEnabled) {
+        loadBooking();
+    }
 }
 
 // Run website
@@ -306,7 +310,7 @@ function loadFooter() {
    BOOKING APPOINTMENT
 ========================================================== */
 function loadBooking() {
-    
+
     // Set Background Image
     const bgContainer = document.getElementById('booking-bg');
     if (bgContainer && CONFIG.booking.bgImage) {
@@ -359,6 +363,53 @@ function loadBooking() {
     if (document.getElementById("booking-submit-button")) {
         document.getElementById("booking-submit-button").textContent = CONFIG.booking.buttonText;
     }
+
+        /* Contact Information */
+        if (document.getElementById("booking-location-title")) {
+            document.getElementById("booking-location-title").textContent = CONFIG.booking.info.locationTitle;
+        }
+        if (document.getElementById("booking-location")) {
+            document.getElementById("booking-location").textContent = CONFIG.booking.info.location;
+        }
+        if (document.getElementById("booking-phone-title")) {
+            document.getElementById("booking-phone-title").textContent = CONFIG.booking.info.phoneTitle;
+        }
+        if (document.getElementById("booking-phone-info")) {
+            document.getElementById("booking-phone-info").textContent = CONFIG.booking.info.phone;
+        }
+        if (document.getElementById("booking-hours-title")) {
+            document.getElementById("booking-hours-title").textContent = CONFIG.booking.info.hoursTitle;
+        }
+        if (document.getElementById("booking-hours")) {
+            document.getElementById("booking-hours").textContent = CONFIG.booking.info.hours;
+        }
+    
+        /* Placeholders */
+
+        if (document.getElementById("booking-name")) {
+            document.getElementById("booking-name").placeholder =
+                CONFIG.booking.placeholders.name;
+        }
+    
+        if (document.getElementById("booking-email")) {
+            document.getElementById("booking-email").placeholder =
+                CONFIG.booking.placeholders.email;
+        }
+    
+        if (document.getElementById("booking-phone")) {
+            document.getElementById("booking-phone").placeholder =
+                CONFIG.booking.placeholders.phone;
+        }
+    
+        if (document.getElementById("booking-budget")) {
+            document.getElementById("booking-budget").placeholder =
+                CONFIG.booking.placeholders.budget;
+        }
+    
+        if (document.getElementById("booking-idea")) {
+            document.getElementById("booking-idea").placeholder =
+                CONFIG.booking.placeholders.message;
+        }
 }
 
 /* ==========================================================

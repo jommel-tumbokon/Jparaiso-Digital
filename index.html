@@ -36,19 +36,11 @@
         <ul class="site-nav__list site-nav__list--left">
       
           <li class="site-nav__item">
-            <a
-              id="nav-shop"
-              href="#"
-              class="site-nav__link">
-            </a>
+            <a id="nav-shop" href="#" class="site-nav__link"></a>
           </li>
-      
+          
           <li class="site-nav__item">
-            <a
-              id="nav-event"
-              href="#"
-              class="site-nav__link">
-            </a>
+            <a id="nav-event" href="#" class="site-nav__link"></a>
           </li>
       
         </ul>
@@ -428,7 +420,7 @@ class="modal__subtitle">
         </section>
 
     
-    <!-- ============================================================
+<!-- ============================================================
      ABOUT SECTION
 ============================================================ -->
 <section class="about-section" id="about">
@@ -522,7 +514,7 @@ class="modal__subtitle">
 
   <div class="booking-inner">
 
-    <h2 id="booking-title"></h2>
+    <h2 id="booking-title" class="modal__title"></h2>
     <p id="booking-subtitle" class="booking-subtitle"></p>
 
 
@@ -535,7 +527,7 @@ class="modal__subtitle">
     id="booking-name-label"
     for="booking-name">
 </label>
-          <input class="booking-input" type="text" id="booking-name" name="name" placeholder="Juan Dela Cruz" required>
+          <input class="booking-input" type="text" id="booking-name" name="name" placeholder="" required>
         </div>
 
         <div class="booking-row">
@@ -544,14 +536,14 @@ class="modal__subtitle">
     id="booking-email-label"
     for="booking-email">
 </label>
-            <input class="booking-input" type="email" id="booking-email" name="email" placeholder="you@example.com" required>
+            <input class="booking-input" type="email" id="booking-email" name="email" placeholder="" required>
           </div>
           <div class="booking-field">
             <label
     id="booking-phone-label"
     for="booking-phone">
 </label>
-            <input class="booking-input" type="tel" id="booking-phone" name="phone" placeholder="+63 912 345 6789" required>
+            <input class="booking-input" type="tel" id="booking-phone" name="phone" placeholder="" required>
           </div>
         </div>
 
@@ -577,7 +569,7 @@ class="modal__subtitle">
     id="booking-message-label"
     for="booking-idea">
 </label>
-          <textarea class="booking-input" id="booking-idea" name="message" rows="5" placeholder="Tell us about your tattoo idea..." required></textarea>
+          <textarea class="booking-input" id="booking-idea" name="message" rows="5" placeholder="" required></textarea>
         </div>
 
         <div class="booking-row">
@@ -586,7 +578,7 @@ class="modal__subtitle">
     id="booking-budget-label"
     for="booking-budget">
 </label>
-            <input class="booking-input" type="text" id="booking-budget" name="budget" placeholder="e.g. ₱3,000 - ₱5,000">
+            <input class="booking-input" type="text" id="booking-budget" name="budget" placeholder="">
           </div>
           <div class="booking-field">
             <label
@@ -604,29 +596,32 @@ class="modal__subtitle">
 </button>
       </form>
     </div>
+
 <!-- Contact Info Grid -->
+
 <div class="booking-info">
   <div>
-    <h3>Location</h3>
-    <p>123 Main Street, Manila</p>
+    <h3 id="booking-location-title"></h3>
+    <p id="booking-location"></p>
   </div>
   <div>
-    <h3>Call / Text</h3>
-    <p>+63 912 345 6789</p>
+    <h3 id="booking-phone-title"></h3>
+    <p id="booking-phone-info"></p>
   </div>
   <div>
-    <h3>Hours</h3>
-    <p>Tue — Sun: 10AM — 8PM</p>
+    <h3 id="booking-hours-title"></h3>
+    <p id="booking-hours"></p>
   </div>
 </div>
-  </div>
+
+
 </section>
 
 
-
-  <!-- ============================================================
+<!-- ============================================================
      EVENT SECTION
 ============================================================ -->
+
 <section class="event-section" id="event">
   <div class="event-section__inner container">
 
@@ -654,7 +649,8 @@ class="modal__subtitle">
   <!-- ============================================================ -->
   <!-- FOOTER -->
   <!-- ============================================================ -->
-  <section id="contact" class="site-footer">
+
+  <footer id="site-footer" class="site-footer">
     <div class="site-footer__main container">
       <div class="site-footer__newsletter-wrapper">
         <h2
@@ -741,6 +737,7 @@ method="POST">
   </footer> 
 
   <!-- TOAST NOTIFICATION -->
+
   <div id="toastNotification" class="rip-toast">
     <div class="rip-toast-content">
       <div class="rip-toast-checkmark">✓</div>
@@ -752,6 +749,7 @@ method="POST">
   </div>
 
   <!-- PRODUCT QUICK VIEW MODAL -->
+
   <div id="productQuickViewModal" class="p-modal-overlay">
     <div class="p-modal-container">
       <button type="button" id="modal-close-btn" class="p-modal-close-btn" aria-label="Close modal">&times;</button>
@@ -821,10 +819,13 @@ class="p-modal-price">
       </div>
     </div>
   </div>
+
 <!-- PAGE TRANSITION OVERLAY -->
+
 <div id="page-transition-overlay"></div>
 
 <!-- DEV TOOL: Clear LocalStorage Config -->
+ 
 <button id="clear-config-btn" style="position: fixed; bottom: 20px; right: 20px; background: #ef4444; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; z-index: 9999;">
   Clear Config Cache
 </button>

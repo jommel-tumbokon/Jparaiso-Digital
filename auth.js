@@ -94,7 +94,7 @@
             localStorage.setItem('rip_user', JSON.stringify(user));
             closeLoginModal();
             updateAccountMenu();
-            showNotification('Welcome back to RIPARADISE', 'success');
+            showNotification(`Welcome back to ${CONFIG.shopName}`, 'success');
             loginForm.reset();
           } else {
             showNotification('Invalid email or password', 'error');
@@ -121,7 +121,7 @@
           localStorage.setItem('rip_user', JSON.stringify(newUser));
           closeRegisterModal();
           updateAccountMenu();
-          showNotification('Account created! Welcome to RIPARADISE', 'success');
+          showNotification(`Account created! Welcome to ${CONFIG.shopName}`, 'success');
           registerForm.reset();
         });
       }

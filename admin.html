@@ -10,18 +10,44 @@
 </head>
 <body>
 
+  <!-- Mobile Menu Toggle Button -->
+<button class="admin-mobile-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle menu">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</button>
+
+<!-- Overlay for mobile sidebar -->
+
+<div class="admin-sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+<!-- ADMIN LAYOUT -->
+
   <div class="admin-layout">
     <!-- SIDEBAR -->
     <aside class="admin-sidebar">
       <div class="admin-logo">Admin <span>Dashboard</span></div>
+      
+      <!-- Mobile Close X Button (Visible ONLY on mobile, nasa right side) -->
+      <button class="admin-sidebar-close" onclick="toggleMobileSidebar()" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
       <nav class="admin-nav">
         <a href="#" class="nav-link active" data-section="general">General Settings</a>
         <a href="#" class="nav-link" data-section="hero">Hero Section</a>
+        <a href="#" class="nav-link" data-section="booking">Booking & Contact</a>
         <a href="#" class="nav-link" data-section="products">Products</a>
         <a href="#" class="nav-link" data-section="footer">Footer & Socials</a>
       </nav>
+      
       <div class="admin-footer">
-        <a href="index.html" class="btn-view-site">View Live Site &rarr;</a>
+        <a href="index.html" class="btn-view-site">View Live Site →</a>
       </div>
     </aside>
 
@@ -41,19 +67,16 @@
             <label for="input-shopName">Shop Name</label>
             <input type="text" id="input-shopName" class="form-input" placeholder="e.g. DSR">
           </div>
-
-          <div class="form-group">
-            <label for="input-tagline">Tagline</label>
-            <input type="text" id="input-tagline" class="form-input" placeholder="e.g. THIS IS MY HERO">
-          </div>
-
           <div class="form-group">
             <label for="input-primaryColor">Primary Color</label>
             <input type="color" id="input-primaryColor" class="form-input-color" value="#ff0000">
           </div>
         </section>
 
-        <!-- HERO SECTION FORM -->
+<!-- ========================================== -->
+<!-- HERO SECTION FORM -->
+<!-- ========================================== -->
+
 <section id="section-hero" class="form-section">
     <div class="form-group">
       <label for="input-heroTitle">Hero Title</label>
@@ -75,6 +98,71 @@
       <input type="text" id="input-heroVideo" class="form-input" placeholder="e.g. assets/products/hero.mp4">
     </div>
   </section>
+
+<!-- ========================================== -->
+<!-- BOOKING & CONTACT SECTION -->
+<!-- ========================================== -->
+ 
+<section id="section-booking" class="form-section">
+  <h2>Booking & Appointment Settings</h2>
+  
+  <div class="form-group">
+    <label>Background Image Path</label>
+    <input type="text" id="input-booking-bgImage" class="form-input" placeholder="e.g., assets/products/bg.jpg">
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group">
+      <label>Booking Title</label>
+      <input type="text" id="input-booking-title" class="form-input">
+    </div>
+    <div class="form-group">
+      <label>Button Text</label>
+      <input type="text" id="input-booking-buttonText" class="form-input">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Booking Subtitle</label>
+    <input type="text" id="input-booking-subtitle" class="form-input">
+  </div>
+
+  <hr style="margin: 30px 0; border: 0; border-top: 1px solid #e4e4e7;">
+  <h3>Contact Information</h3>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Location Title</label>
+      <input type="text" id="input-booking-locationTitle" class="form-input">
+    </div>
+    <div class="form-group">
+      <label>Location</label>
+      <input type="text" id="input-booking-location" class="form-input">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Phone Title</label>
+      <input type="text" id="input-booking-phoneTitle" class="form-input">
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="text" id="input-booking-phone" class="form-input">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Hours Title</label>
+      <input type="text" id="input-booking-hoursTitle" class="form-input">
+    </div>
+    <div class="form-group">
+      <label>Operating Hours</label>
+      <input type="text" id="input-booking-hours" class="form-input">
+    </div>
+  </div>
+</section>
   
   <!-- PRODUCTS SECTION -->
   <section id="section-products" class="form-section">

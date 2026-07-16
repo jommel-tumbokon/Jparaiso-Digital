@@ -9,11 +9,20 @@ const CONFIG = {
     },
 
 /* ==========================================
+   GLOBAL SETTINGS
+========================================== */
+
+     currency: "₱", // <--- (Pwede palitan ng $, €, etc.)
+
+/* ==========================================
        BRANDING
 ========================================== */
-    shopName: "INK MASTERS TATTOO", // Pinalitan ko na rin
-    tagline: "PREMIUM CUSTOM TATTOOS",
-    logo: "assets/products/dsrlogo1.png",
+
+     shopName: "INK MASTERS TATTOO", 
+
+     tagline: "PREMIUM CUSTOM TATTOOS",
+
+     logo: "assets/products/dsrlogo1.png",
 
 /* ==========================================
        HERO SECTION (Isa lang dapat 'to!)
@@ -260,7 +269,7 @@ navigation: {
 
 seo: {
 
-    title: "DSR",
+    title: "SAMPLE STUDIO",
 
     description: "Premium streetwear inspired by modern culture.",
 
@@ -358,7 +367,7 @@ lookbook: {
 
 auth: {
 
-    loginTitle: "Welcome Back",
+    loginTitle: "Welcome Back to Ink MASTERS TATTOO",
 
     loginSubtitle:
         "Enter your credentials to access your account",

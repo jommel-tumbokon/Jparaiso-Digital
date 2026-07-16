@@ -22,7 +22,7 @@ function toggleCart() {
     if (!bodyContainer) return;
     if (riparadiseCart.length === 0) {
       bodyContainer.innerHTML = '<div class="rip-cart-empty">YOUR BAG IS CURRENTLY EMPTY.</div>';
-      if (totalSpan) totalSpan.innerText = "₱0.00";
+      if (totalSpan) totalSpan.innerText = `${CONFIG.currency || '₱'}0.00`;
       return;
     }
     let cartHTML = '';
@@ -51,7 +51,7 @@ function toggleCart() {
     });
     cartHTML += `<div style="margin-top: 20px; text-align: center;"><a href="#" onclick="navigateWithFade('checkout.html'); return false;" class="btn btn--primary" style="width: 100%; display: block; text-decoration: none;">PROCEED TO CHECKOUT</a></div>`;
     bodyContainer.innerHTML = cartHTML;
-    if (totalSpan) totalSpan.innerText = `₱${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+    if (totalSpan) totalSpan.innerText = `${CONFIG.currency || '₱'}${grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
   }
 
   

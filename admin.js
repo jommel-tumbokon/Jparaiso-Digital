@@ -3,6 +3,37 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🔧 Admin Dashboard loaded');
 
+    // ==================== NEW: DEEP MERGE HELPER ====================
+    // Kinopya natin ito para mabasa ng admin ang saved data mula sa LocalStorage
+    function deepMergeConfig(target, source) {
+        if (!source || typeof source !== 'object') return target;
+        Object.keys(source).forEach((key) => {
+            const sourceVal = source[key];
+            const targetVal = target[key];
+            if (
+                sourceVal && typeof sourceVal === 'object' && !Array.isArray(sourceVal) &&
+                targetVal && typeof targetVal === 'object' && !Array.isArray(targetVal)
+            ) {
+                deepMergeConfig(targetVal, sourceVal);
+            } else {
+                target[key] = sourceVal;
+            }
+        });
+        return target;
+    }
+
+    // ==================== NEW: LOAD SAVED CONFIG ====================
+    try {
+        const savedConfig = localStorage.getItem('studioos_config');
+        if (savedConfig) {
+            const parsedConfig = JSON.parse(savedConfig);
+            deepMergeConfig(CONFIG, parsedConfig);
+            console.log('✅ Admin loaded saved config from LocalStorage');
+        }
+    } catch (e) {
+        console.error('❌ Error loading saved config, falling back to default CONFIG:', e);
+    }
+
     // Helper para safe ang pagkuha ng value (kahit walang laman ang CONFIG)
     const getVal = (obj, path, fallback = '') => {
         return path.split('.').reduce((acc, part) => acc && acc[part], obj) || fallback;
@@ -23,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Populate General Settings Form
     document.getElementById('input-shopName').value = CONFIG.shopName || '';
-    document.getElementById('input-tagline').value = CONFIG.tagline || '';
     document.getElementById('input-primaryColor').value = getVal(CONFIG, 'colors.primary', '#000000');
 
     // 2. Populate Hero Section Form
@@ -40,29 +70,44 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('input-newsletterPlaceholder').value = getVal(CONFIG, 'newsletter.placeholder', '');
     document.getElementById('input-newsletterFormAction').value = getVal(CONFIG, 'newsletter.formAction', '');
     document.getElementById('input-footerCopyright').value = getVal(CONFIG, 'footer.copyright', '');
+    document.getElementById('input-booking-bgImage').value = getVal(CONFIG, 'booking.bgImage', '');
+    document.getElementById('input-booking-title').value = getVal(CONFIG, 'booking.title', '');
+    document.getElementById('input-booking-subtitle').value = getVal(CONFIG, 'booking.subtitle', '');
+    document.getElementById('input-booking-buttonText').value = getVal(CONFIG, 'booking.buttonText', '');
+    document.getElementById('input-booking-locationTitle').value = getVal(CONFIG, 'booking.info.locationTitle', '');
+    document.getElementById('input-booking-location').value = getVal(CONFIG, 'booking.info.location', '');
+    document.getElementById('input-booking-phoneTitle').value = getVal(CONFIG, 'booking.info.phoneTitle', '');
+    document.getElementById('input-booking-phone').value = getVal(CONFIG, 'booking.info.phone', '');
+    document.getElementById('input-booking-hoursTitle').value = getVal(CONFIG, 'booking.info.hoursTitle', '');
+    document.getElementById('input-booking-hours').value = getVal(CONFIG, 'booking.info.hours', '');
 
     // 4. Render Products List
     renderProductsList();
 
     // 5. Tab Switching Logic
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.form-section');
-    const pageTitle = document.getElementById('page-title');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.form-section');
+const pageTitle = document.getElementById('page-title');
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            navLinks.forEach(l => l.classList.remove('active'));
-            sections.forEach(s => s.classList.remove('active'));
-            link.classList.add('active');
-            const targetSection = link.getAttribute('data-section');
-            const targetElement = document.getElementById(`section-${targetSection}`);
-            if (targetElement) {
-                targetElement.classList.add('active');
-                pageTitle.innerText = link.innerText;
-            }
-        });
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navLinks.forEach(l => l.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        link.classList.add('active');
+        const targetSection = link.getAttribute('data-section');
+        const targetElement = document.getElementById(`section-${targetSection}`);
+        if (targetElement) {
+            targetElement.classList.add('active');
+            pageTitle.innerText = link.innerText;
+        }
+        
+        // Auto-close sidebar on mobile after clicking
+        if (window.innerWidth <= 768) {
+            toggleMobileSidebar();
+        }
     });
+});
 
     // 6. Save Button Logic (Defensive - Hindi na mag-eerror!)
     const saveBtn = document.getElementById('save-config-btn');
@@ -71,13 +116,24 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 // I-save ang lahat gamit ang safe na setVal function
                 setVal(CONFIG, 'shopName', document.getElementById('input-shopName').value);
-                setVal(CONFIG, 'tagline', document.getElementById('input-tagline').value);
                 setVal(CONFIG, 'colors.primary', document.getElementById('input-primaryColor').value);
 
                 setVal(CONFIG, 'hero.title', document.getElementById('input-heroTitle').value);
                 setVal(CONFIG, 'hero.subtitle', document.getElementById('input-heroSubtitle').value);
                 setVal(CONFIG, 'hero.button', document.getElementById('input-heroButton').value);
                 setVal(CONFIG, 'hero.video', document.getElementById('input-heroVideo').value);
+                // SAVE BOOKING SETTINGS
+            setVal(CONFIG, 'booking.bgImage', document.getElementById('input-booking-bgImage').value);
+            setVal(CONFIG, 'booking.title', document.getElementById('input-booking-title').value);
+            setVal(CONFIG, 'booking.subtitle', document.getElementById('input-booking-subtitle').value);
+            setVal(CONFIG, 'booking.buttonText', document.getElementById('input-booking-buttonText').value);
+            
+            setVal(CONFIG, 'booking.info.locationTitle', document.getElementById('input-booking-locationTitle').value);
+            setVal(CONFIG, 'booking.info.location', document.getElementById('input-booking-location').value);
+            setVal(CONFIG, 'booking.info.phoneTitle', document.getElementById('input-booking-phoneTitle').value);
+            setVal(CONFIG, 'booking.info.phone', document.getElementById('input-booking-phone').value);
+            setVal(CONFIG, 'booking.info.hoursTitle', document.getElementById('input-booking-hoursTitle').value);
+            setVal(CONFIG, 'booking.info.hours', document.getElementById('input-booking-hours').value);
 
                 setVal(CONFIG, 'socials.instagram', document.getElementById('input-socialInstagram').value);
                 setVal(CONFIG, 'socials.tiktok', document.getElementById('input-socialTiktok').value);
@@ -157,3 +213,24 @@ function deleteProduct(index) {
         localStorage.setItem('studioos_config', JSON.stringify(CONFIG));
     }
 }
+
+// Mobile Sidebar Toggle Function
+function toggleMobileSidebar() {
+    const sidebar = document.querySelector('.admin-sidebar');
+    const overlay = document.querySelector('.admin-sidebar-overlay');
+    const hamburger = document.querySelector('.admin-mobile-toggle');
+    
+    if (sidebar && overlay) {
+      sidebar.classList.toggle('is-open');
+      overlay.classList.toggle('is-open');
+      
+      // Hide hamburger button when sidebar is open
+      if (hamburger) {
+        if (sidebar.classList.contains('is-open')) {
+          hamburger.classList.add('hide');
+        } else {
+          hamburger.classList.remove('hide');
+        }
+      }
+    }
+  }
