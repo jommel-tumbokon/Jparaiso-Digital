@@ -152,15 +152,16 @@
   /* --------------------------------------------------------------------------
      3. SITE HEADER & NAVIGATION (DEFAULT: TRANSPARENT WHITE OVER HERO VIDEO)
      -------------------------------------------------------------------------- */
-  .site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: var(--z-header);
-    color: #ffffff; /* Piliting puti muna habang nasa ibabaw ng madilim na video background */
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-  }
+     .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: var(--z-header);
+      background-color: transparent; /* TRANSPARENT HEADER */
+      color: #ffffff; /* Laging puti habang nasa hero video */
+      transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+      }
   
   .site-header__inner {
     display: flex;
@@ -180,11 +181,32 @@
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
     opacity: 0.9;
-    transition: opacity 0.2s ease;
+    position: relative; /* Kailangan para sa underline animation */
+    padding-bottom: 4px; /* Space para sa linya */
+    /* Pinalawak natin ang transition para smooth ang lahat ng galaw */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
   }
   
   .site-nav__link:hover {
     opacity: 1;
+    transform: translateY(-2px); /* Konting lift pataas */
+    color: var(--color-primary); /* Magiging kulay ng brand mo pag hinover */
+  }
+
+  /* ITO ANG BAGONG SLIDING UNDERLINE */
+  .site-nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px; /* Manipis na linya para premium ang dating */
+    background-color: var(--color-primary);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .site-nav__link:hover::after {
+    width: 100%; /* Lulawak ang linya mula kaliwa patungo sa kanan */
   }
   
   .site-header__logo {
@@ -255,21 +277,18 @@
     transform: translateY(-120%);
   }
   
-  /* Kakagat 'to kapag nag-scroll up: Magiging White Background bar na may Black Links/Icons */
   .site-header--scrolled {
     background-color: var(--color-header-scrolled-bg) !important;
-    color: #000000 !important; /* Itim na ang teksto at logo */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important; /* Eleganteng manipis na anino */
+    color: var(--color-text) !important; /* Sumusunod sa theme (black or white) */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
   }
   
-  /* Palitan ang icon stroke kapag naka-white scrolled background na */
   .site-header--scrolled .icon {
-    stroke: #000000 !important;
+    stroke: var(--color-text) !important; /* Sumusunod sa theme */
   }
   
-  /* Baguhin ang kulay ng burger bars sa mobile button kapag white na ang background */
   .site-header--scrolled .nav-toggle-btn__bar {
-    background-color: #000000 !important;
+    background-color: var(--color-text) !important; /* Sumusunod sa theme */
   }
   
   /* --------------------------------------------------------------------------
@@ -415,7 +434,7 @@
 
 .about-section {
   padding: 160px 0;
-  background: #ffffff;
+  background: var(--color-bg);
 }
 
 .about-section__inner {
@@ -482,9 +501,9 @@
      5. FEATURED PRODUCTS & GRID SYSTEM (CLEAN BLACK ON WHITE)
      -------------------------------------------------------------------------- */
      
-  .shop-section {
-    padding: var(--space-xl) 0;
-    background-color: #ffffff !important;
+     .shop-section {
+      padding: var(--space-xl) 0;
+      background-color: var(--color-bg) !important;
   }
   
   .section-header {
@@ -563,7 +582,7 @@
 .product-card__media {
   position: relative;
   aspect-ratio: 4 / 5;
-  background-color: #ffffff; /* Light gray box para lumutang agad ang mockups niyo */
+  background-color: var(--color-surface);
   overflow: hidden;
   margin-bottom: var(--space-sm);
 }
@@ -688,12 +707,12 @@
   /* --------------------------------------------------------------------------
      8. SITE FOOTER SECTION (MINIMALIST / REFERENCE STYLE)
      -------------------------------------------------------------------------- */
-  .site-footer {
-    background-color: #ffffff !important;
-    border-top: 1px solid #e5e5e5;
-    padding: var(--space-xl) 0 var(--space-md);
-    color: #000000 !important;
-  }
+     .site-footer {
+      background-color: var(--color-bg) !important;
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-xl) 0 var(--space-md);
+      color: var(--color-text) !important;
+      }
   
   .site-footer__main {
     display: flex;
@@ -707,9 +726,9 @@
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
     margin: 0 0 24px 0;
-    color: #000000 !important;
+    color: var(--color-text) !important;
     font-weight: 600;
-  }
+    }
   
   /* Modern Form Styling */
   .modern-newsletter-form {
@@ -747,13 +766,13 @@
     background: transparent;
     font-family: inherit;
     font-size: 16px;
-    color: #000000;
+    color: var(--color-text);
     padding: 0;
-  }
-  
-  .modern-newsletter-form__input::placeholder {
-    color: #aaa;
-  }
+    }
+    
+    .modern-newsletter-form__input::placeholder {
+      color: var(--color-text-muted);
+      }
   
   /* Animated Arrow Button */
   .modern-newsletter-form__submit {
@@ -764,9 +783,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #000000;
+    color: var(--color-text);
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
+    }
   
   .modern-newsletter-form__submit svg {
     transition: stroke 0.3s ease;
@@ -794,25 +813,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #000000 !important;
+    color: var(--color-text) !important;
     opacity: 0.7;
     transition: opacity 0.3s ease;
-  }
+    }
+    
+    /* Ensure SVG icons follow theme */
+    .social-links__link svg,
+    .social-links__link .icon {
+    stroke: var(--color-text) !important;
+    }
   
   .social-links__link:hover {
     opacity: 1;
   }
   
-  /* Ensure SVG icons are black */
-  .social-links__link svg,
-  .social-links__link .icon {
-    stroke: #000000 !important;
-  }
-  
   .site-footer__bottom {
-    border-top: 1px solid #e5e5e5;
+    border-top: none;
     padding-top: var(--space-md);
-  }
+    }
   
   .site-footer__bottom-inner {
     display: flex;
@@ -1801,36 +1820,40 @@
   }
 }
 /* ==========================================================================
-   ANTI-BLINK ULTRA-SMOOTH INFINITE LOOKBOOK MARQUEE
+   ANTI-BLINK ULTRA-SMOOTH INFINITE LOOKBOOK MARQUEE (MOBILE OPTIMIZED)
    ========================================================================== */
    .lookbook-marquee {
     overflow: hidden;
     width: 100%;
-    background-color: #ffffff;
-    padding: 20px 0;
+    background-color: var(--color-bg);
+    padding: 0;
     display: flex;
     align-items: center;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
   
   .marquee-track {
     display: inline-flex;
     gap: 0;
     width: max-content;
-    animation: scrollLeft 18s linear infinite;
+    animation: scrollLeft 25s linear infinite; /* Pinaluwag ng konti para di ma-stutter ang mobile */
     will-change: transform;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+    transform: translate3d(0, 0, 0); /* Mas malakas na GPU hint kaysa translateZ lang */
+    -webkit-transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
   
   .marquee-track img {
-    height: 280px;
-    width: 350px;
+    height: 350px;
+    width: 400px;
     object-fit: cover;
     flex-shrink: 0;
     display: block;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
   }
   
   .lookbook-marquee:hover .marquee-track {
@@ -1839,9 +1862,19 @@
   
   .marquee-bottom-divider {
     border: 0;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid var(--color-border);
     margin: 0;
     width: 100%;
+  }
+  
+  /* ️ MAHALAGA: Siguraduhing nasa baba nito ang @keyframes mo */
+  @keyframes scrollLeft {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0); /* -50% dahil dinoble natin ang images sa JS para sa seamless loop */
+    }
   }
 
 /* --------------------------------------------------------------------------
@@ -1968,11 +2001,14 @@
     touch-action: manipulation;
   }
 }
-/* EVENT SECTION */
+/* --------------------------------------------------------------------------
+      EVENT SECTION
+   -------------------------------------------------------------------------- */
+
 .event-section {
   padding: 60px 0;
-  background-color: #ffffff;
-  border-top: 1px solid #e5e5e5;
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border);
   text-align: center;
 }
 
@@ -1994,8 +2030,8 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 8px 0 20px;
-  color: #000000;
-}
+  color: var(--color-text);
+  }
 
 .event-section__desc {
   font-size: 14px;
@@ -2590,15 +2626,15 @@
 
 /* 4. Premium Translucent Form Card (Pinaka-magandang version from your old code) */
 .booking-card {
-  max-width: 600px; /* Slightly wider for better form layout */
-  margin: 0 auto 40px auto;
-  text-align: left;
-  background: rgba(255, 255, 255, 0.95); /* Mas malinis na white */
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 18px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-  padding: 40px 36px;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    text-align: left;
+    background: var(--color-surface);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    padding: 40px 36px;
 }
 
 .booking-row {
@@ -2616,7 +2652,7 @@
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.4px;
-  color: #333;
+  color: var(--color-text);  /* ✅ WHITE SA DARK MODE */
   margin-bottom: 6px;
   text-transform: uppercase;
 }
@@ -2624,47 +2660,47 @@
 .booking-field .hint {
   font-weight: 400;
   text-transform: none;
-  color: #888;
+  color: var(--color-text-muted);  /* ✅ SUMUSUNOD SA THEME */
   font-size: 0.75rem;
 }
 
 .booking-input {
   width: 100%;
   padding: 13px 14px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-family: inherit;
   font-size: 0.95rem;
-  background: #fff;
-  color: #111;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  background: var(--color-surface); 
+  color: var(--color-text); 
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
+.booking-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ✅ Config-Driven Hover (Wala nang hardcoded #b5b5b5) */
 .booking-input:hover {
-  border-color: #b5b5b5;
+  border-color: var(--color-text-muted); 
 }
 
+/* ✅ Config-Driven Focus (Wala nang hardcoded #111) */
 .booking-input:focus {
   outline: none;
-  border-color: #111;
-  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.12);
+  border-color: var(--color-primary); /* Sumusunod sa brand color mo */
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+  background-color: var(--color-surface) !important; /* Iwas white flash */
 }
 
-textarea.booking-input {
-  resize: vertical;
-  min-height: 110px;
-}
-
-.booking-file {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px dashed #c9c9c9;
-  border-radius: 8px;
-  background: #fafafa;
-  font-size: 0.85rem;
-  color: #555;
-  cursor: pointer;
-  transition: border-color 0.25s ease, background 0.25s ease;
+/* ✅ THE ULTIMATE AUTOFILL FIX (Iwas blue/white background) */
+.booking-input:-webkit-autofill,
+.booking-input:-webkit-autofill:hover,
+.booking-input:-webkit-autofill:focus,
+.booking-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--color-surface) inset !important;
+  -webkit-text-fill-color: var(--color-text) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .booking-file:hover {
@@ -2709,3 +2745,320 @@ textarea.booking-input {
   .booking-card { padding: 26px 20px; border-radius: 14px; }
   .booking-row { grid-template-columns: 1fr; gap: 0; }
 }
+
+/* ==========================================================
+   GALLERY SECTION (PREMIUM CONFIG-DRIVEN GRID)
+========================================================== */
+.gallery-section {
+  padding: 100px 20px;
+  background-color: var(--color-bg);
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.gallery-header__subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.gallery-header__title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* GRID LAYOUT */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* GALLERY ITEM & SCROLL ANIMATION */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  aspect-ratio: 4 / 5;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+}
+
+/* HOVER ZOOM EFFECT */
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+/* LIGHTBOX MODAL */
+.gallery-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.gallery-lightbox.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  padding: 20px;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: lightboxZoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes lightboxZoomIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* PREMIUM iOS-LIKE X BUTTON */
+.lightbox-close-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10000;
+}
+
+.lightbox-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .gallery-section {
+    padding: 60px 16px;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr; /* 1 column sa mobile */
+    gap: 20px;
+  }
+  
+  .gallery-item {
+    aspect-ratio: 4 / 5;
+  }
+  
+  .lightbox-close-btn {
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ==========================================================================
+   BOOKING SUCCESS MODAL (PREMIUM MINIMALIST)
+   ========================================================================== */
+   .booking-success-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .booking-success-modal.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  
+  .booking-success-modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  
+  .booking-success-modal__content {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: 16px;
+    padding: 48px 32px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+  }
+  
+  .booking-success-modal.is-active .booking-success-modal__content {
+    transform: scale(1);
+  }
+  
+  .booking-success-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .booking-success-modal__close:hover {
+    background: var(--color-bg-elevated);
+    color: var(--color-text);
+  }
+  
+  .booking-success-modal__icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+  }
+  
+  .booking-success-modal__icon svg {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .booking-success-modal__title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .booking-success-modal__message {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0 0 32px 0;
+  }
+  
+  .booking-success-modal__btn {
+    width: 100%;
+    padding: 14px 24px;
+    background: var(--color-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .booking-success-modal__btn:hover {
+    background: var(--color-primary-inverse);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+  
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 480px) {
+    .booking-success-modal__content {
+      padding: 40px 24px;
+      width: 95%;
+    }
+    
+    .booking-success-modal__title {
+      font-size: 20px;
+    }
+    
+    .booking-success-modal__icon {
+      width: 64px;
+      height: 64px;
+    }
+    
+    .booking-success-modal__icon svg {
+      width: 32px;
+      height: 32px;
+    }
+  }

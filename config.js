@@ -1,12 +1,17 @@
 const CONFIG = {
 
 /* ==========================================
-       MODULES / FEATURES TOGGLE
+   MODULES / FEATURES TOGGLE
 ========================================== */
-    modules: {
-        ecommerce: false,    // false = Itago ang Products at Cart
-        appointment: true    // true = Ipakita ang Booking/Contact focus
-    },
+modules: {
+    ecommerce: false,      // false = Hide Shop & Cart
+    appointment: true,     // true = Show Booking Section
+    event: false,           // true = Show Instagram/Event Section
+    gallery: true,         // true = Show Gallery Section
+    newsletter: true,      // true = Show Newsletter Section
+    showSearch: false,     // false = Hide Search Icon
+    showAccount: false     // false = Hide Account/Login Icon
+},
 
 /* ==========================================
    GLOBAL SETTINGS
@@ -18,23 +23,29 @@ const CONFIG = {
        BRANDING
 ========================================== */
 
-     shopName: "INK MASTERS TATTOO", 
+     shopName: "", 
 
-     tagline: "PREMIUM CUSTOM TATTOOS",
+     tagline: "",
 
-     logo: "assets/products/dsrlogo1.png",
+     logo: "assets/products/LOGO.png",
 
 /* ==========================================
-       HERO SECTION (Isa lang dapat 'to!)
+       HERO SECTION
 ========================================== */
     hero: {
-        title: "INK MASTERS TATTOO",
-        subtitle: "Premium Custom Tattoos & Piercings",
+        title: "",
+        subtitle: "",
         button: "BOOK APPOINTMENT", 
         buttonLink: "#contact",     
         video: "", 
-        image: "assets/products/dsr.png", 
+        image: "assets/products/collage.png",
     },
+
+    /* ==========================================
+THEME MODE
+========================================== */
+
+        theme: "light",  
 
 /* ==========================================
        COLORS
@@ -207,11 +218,11 @@ productModal: {
 
 socials: {
 
-    instagram: "https://www.instagram.com/world.ph.3000.dsr.c/",
+    instagram: "https://www.instagram.com/jovit_tattoo/",
 
-    tiktok: "https://www.tiktok.com/@world.ph.3000.dsr",
+    tiktok: "",
 
-    youtube: "https://www.youtube.com/@DSR.WORLDWIDE"
+    youtube: ""
 
 },
 
@@ -269,7 +280,7 @@ navigation: {
 
 seo: {
 
-    title: "SAMPLE STUDIO",
+    title: "TATTOO STUDIO",
 
     description: "Premium streetwear inspired by modern culture.",
 
@@ -297,16 +308,16 @@ contact: {
 
 about: {
 
-    title: "ABOUT DSR",
+    title: "JOVIT TATTOO STUDIO",
 
     subtitle: "Designed for modern street culture.",
 
     description:
-        "DSR creates premium apparel inspired by skateboarding, art, and everyday life. Every collection focuses on quality, comfort, and timeless design.",
+        "Every line I draw tells a story — not just on skin, but in the confidence and identity of the person wearing it. My craft is precision, my art is emotion, and every tattoo is a mark of trust.",
 
-    image: "assets/products/dsr.png",
+    image: "assets/products/jovit.png",
 
-    button: "LEARN MORE"
+    button: "VIEW GALLERY"
 
 },
 
@@ -461,7 +472,7 @@ cart: {
 
 booking: {
 
-    bgImage: "assets/products/dsr.png",
+    bgImage: "assets/products/collage.png",
 
     title: "Book Your Session",
 
@@ -523,13 +534,13 @@ booking: {
     placeholders: {
 
         name:
-            "Juan Dela Cruz",
+            "",
 
         email:
-            "you@example.com",
+            "",
 
         phone:
-            "+63 912 345 6789",
+            "",
 
         budget:
             "e.g. ₱3,000 - ₱5,000",
@@ -543,8 +554,32 @@ booking: {
         "(optional)",
 
     referenceAccept:
-        "image/*"
+        "image/*",
 
+    successMessage: {
+            title: "Thank You!",
+            message: "Your booking has been received. We'll contact you soon to confirm your appointment.",
+            buttonText: "CLOSE"
+        }
+
+},
+
+/* ==========================================
+   GALLERY SECTION
+========================================== */
+gallery: {
+    title: "Gallery",
+    subtitle: "MY ARTWORK",
+    buttonText: "VIEW GALLERY",  // Para sa About section button
+    images: [
+        "assets/products/slidingpic (1).png",
+        "assets/products/slidingpic (2).png",
+        "assets/products/slidingpic (3).png",
+        "assets/products/slidingpic (4).png",
+        "assets/products/jovit (2).png",
+        "assets/products/jovit (3).png"
+        
+    ]
 },
 
 };

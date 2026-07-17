@@ -36,11 +36,11 @@
         <ul class="site-nav__list site-nav__list--left">
       
           <li class="site-nav__item">
-            <a id="nav-shop" href="#" class="site-nav__link"></a>
+            <a id="nav-home" href="#home" class="site-nav__link">HOME</a>
           </li>
           
           <li class="site-nav__item">
-            <a id="nav-event" href="#" class="site-nav__link"></a>
+            <a id="nav-booknow" href="#contact" class="site-nav__link">BOOK NOW</a>
           </li>
       
         </ul>
@@ -60,7 +60,7 @@
   
       <div class="site-header__actions">
         <!-- SEARCH -->
-        <div class="rip-search-container">
+        <div class="rip-search-container" id="header-search-container">
           <button type="button" class="rip-search-trigger" onclick="toggleSearch()" aria-label="Open search">
             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="7"/>
@@ -84,7 +84,7 @@
         </div>
       
         <!-- ACCOUNT DROPDOWN -->
-        <div class="account-dropdown">
+        <div class="account-dropdown" id="header-account-container">
           <button type="button" class="site-header__icon-btn" onclick="toggleAccountMenu()" aria-label="Account">
             <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <circle cx="12" cy="8" r="4"/>
@@ -180,21 +180,17 @@ onclick="logout(); return false;">
       <nav class="mobile-nav__inner" aria-label="Mobile">
         <ul class="mobile-nav__list">
           <li>
-
-            <a
-                id="mobile-nav-shop"
-                href="#"
-                class="mobile-nav__link">
-    
-                <span id="mobile-nav-shop-text"></span>
-    
-                <span class="mobile-nav__arrow">
-                    &rarr;
-                </span>
-    
+            <a id="mobile-nav-home" href="#home" class="mobile-nav__link">
+                <span>HOME</span>
+                <span class="mobile-nav__arrow">&rarr;</span>
             </a>
-    
-        </li>
+          </li>
+          <li>
+            <a id="mobile-nav-booknow" href="#contact" class="mobile-nav__link">
+                <span>BOOK NOW</span>
+                <span class="mobile-nav__arrow">&rarr;</span>
+            </a>
+          </li>
         <li>
 
           <a
@@ -211,11 +207,11 @@ onclick="logout(); return false;">
           </a>
   
       </li>
-          <li id="mobileAccountGuest" class="mobile-nav__divider">
-            <a href="#" class="mobile-nav__link" onclick="openLoginModal(); document.getElementById('nav-toggle').checked = false; return false;">
-              <span>Log In</span><span class="mobile-nav__arrow">&rarr;</span>
-            </a>
-          </li>
+      <li id="mobileAccountGuest" class="mobile-nav__divider">
+        <a href="#" class="mobile-nav__link" onclick="openLoginModal(); document.getElementById('nav-toggle').checked = false; return false;">
+          <span>Log In</span><span class="mobile-nav__arrow">&rarr;</span>
+        </a>
+      </li>
           
           <li id="mobileAccountUser" style="display: none;" class="mobile-nav__divider">
             <div style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #888; border-bottom: 1px solid #e5e5e5; margin-bottom: 8px;">
@@ -493,6 +489,41 @@ class="modal__subtitle">
         <ul class="product-grid" id="productGrid"></ul>
       </article>
     </section>
+
+
+<!-- ============================================================ -->
+<!-- GALLERY SECTION (PREMIUM CONFIG-DRIVEN GRID) -->
+<!-- ============================================================ -->
+
+<section id="gallery-section" class="gallery-section">
+  <div class="container">
+    <div class="gallery-header">
+      <p id="gallery-subtitle" class="gallery-header__subtitle"></p>
+      <h2 id="gallery-title" class="gallery-header__title"></h2>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- Dito mag-i-inject ang JavaScript ng mga images mula sa CONFIG -->
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX MODAL (Hidden by default) -->
+<div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true">
+  <button class="lightbox-close-btn" id="lightbox-close" aria-label="Close gallery image">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  <div class="lightbox-content">
+    <img src="" alt="Gallery Zoom" id="lightbox-image" class="lightbox-image">
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDING PICTURES -->
+<!-- ============================================================ -->
     
     <div class="lookbook-marquee">
       <div
@@ -617,6 +648,26 @@ class="modal__subtitle">
 
 </section>
 
+
+  <!-- ============================================================ -->
+  <!-- BOOKING SUCCESS MODAL (Hidden by default) -->
+  <!-- ============================================================ -->
+  <div class="booking-success-modal" id="booking-success-modal" aria-hidden="true">
+    <div class="booking-success-modal__overlay"></div>
+    <div class="booking-success-modal__content">
+      <div class="booking-success-modal__icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      
+      <h3 id="booking-success-title" class="booking-success-modal__title"></h3>
+      <p id="booking-success-message" class="booking-success-modal__message"></p>
+      
+      <button class="booking-success-modal__btn" id="booking-success-btn">CLOSE</button>
+    </div>
+  </div>
 
 <!-- ============================================================
      EVENT SECTION
@@ -824,11 +875,7 @@ class="p-modal-price">
 
 <div id="page-transition-overlay"></div>
 
-<!-- DEV TOOL: Clear LocalStorage Config -->
- 
-<button id="clear-config-btn" style="position: fixed; bottom: 20px; right: 20px; background: #ef4444; color: #fff; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; z-index: 9999;">
-  Clear Config Cache
-</button>
+
 
 <script>
 document.getElementById('clear-config-btn')?.addEventListener('click', () => {
