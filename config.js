@@ -51,7 +51,7 @@ THEME MODE
        COLORS
 ========================================== */
     colors: {
-        primary: "#ff0000",
+        primary: "#000000",
         secondary: "#ffffff"
     },
 
